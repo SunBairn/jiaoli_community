@@ -68,7 +68,7 @@ import java.util.Map;
     List<Question> findAllQuestionWithUserByHot(@Param("type") Integer type, @Param("start")Long start,@Param("size") int size);
 
     /**
-     * 分页查询所有问题或帖子,条件为回复数为0的问题
+     * 分页查询所有问题或帖子,条件为：回复数为0的问题
      * @param type
      * @param start
      * @param size
@@ -112,7 +112,6 @@ import java.util.Map;
     @Results({
             @Result(column = "id",property = "id",id = true),
             @Result(column = "creator",property = "user",one = @One(select = "com.zls.mapper.UserMapper.findByIdPortion")),
-            @Result(column = "id",property = "questionCommentList",many = @Many(select = "com.zls.mapper.QuestionCommentMapper.findCommentWithUserById"))
     })
     Question findQuestionWithUserWithCommentById(@Param("id") Integer id);
 
@@ -124,6 +123,13 @@ import java.util.Map;
     @Select("select count(1) from tb_question where type=#{type}")
     Long questionCount(@Param("type") Integer type);
 
+
+    /**
+     * 根据ID查询阅读数(用于判定是否从数据库中取放入缓存中)
+     * @Param id
+     */
+    @Select("select view_count from tb_question where id = #{id}")
+    Integer getViewCount(@Param("id") Integer id);
 
     /**
      * 同步点赞数到数据库中

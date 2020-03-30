@@ -45,7 +45,7 @@ public class JwtFilter extends HandlerInterceptorAdapter {
                 Map<String,String> entries = redisTemplate.opsForHash().entries("user:" + id);
                 if (!entries.isEmpty()){
                     // 2、如果不为空，则刷新token
-                    String jwttoken = JWTUtils.createJWT(entries.get("id"), entries.get("nickname"), null, "user");
+                    final String jwttoken = JWTUtils.createJWT(entries.get("id"), entries.get("nickname"), null, "user");
                     // 3、重新生成jwttoken后重置redis中的用户信息
                     redisTemplate.opsForHash().put("user:"+entries.get("id"),"id",entries.get("id"));
                     redisTemplate.opsForHash().put("user:"+entries.get("id"),"nickname",entries.get("nickname"));
@@ -61,7 +61,8 @@ public class JwtFilter extends HandlerInterceptorAdapter {
                         ex.printStackTrace();
                     }
                 }
-                e.printStackTrace();
+                // 这个抛出的异常是第一次进来jwttoken解析的异常
+               // e.printStackTrace();
             }
             if (claims != null) {
                 if ("admin".equals(claims.get("roles"))) {

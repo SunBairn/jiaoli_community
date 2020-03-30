@@ -70,16 +70,6 @@ public class JWTUtils {
         return cla;
     }
 
-    public static void main(String[] args) throws Exception {
-//        Claims claims = parseJWT("eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiI1Iiwic3ViIjoiamlhb2xpXzE1NzcwNjI1OTgzIiwiaXNzIjoidXNlciIsImV4cCI6MTU4NDk0Nzk0NywiaWF0IjoxNTg0OTQ0MzQ3LCJyb2xlcyI6InVzZXIifQ.jJMpZ1-ijdy-b9XIzQYKz3ZCJ8q6qZZeln9eeGi2_Bo");
-//        System.out.println(claims);
-        String a="hahahahfdgdfsgdfgdfsgds";
-        String s = com.sun.org.apache.xml.internal.security.utils.Base64.encode(a.getBytes());
-        System.out.println(s);
-        byte[] bytes = com.sun.org.apache.xml.internal.security.utils.Base64.decode(s);
-        System.out.println(bytes);
 
-
-    }
 
 }

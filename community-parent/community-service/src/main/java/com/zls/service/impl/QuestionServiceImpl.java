@@ -14,6 +14,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
+
 @Service
 @Transactional
 @Repository public class QuestionServiceImpl implements QuestionService {
@@ -38,12 +40,30 @@ import java.util.List;
         Page<Question> page1 = new Page<>(total,page,Page.pageSize);
         if(sort.equals("new")) {
             allQuestion = questionMapper.findAllQuestionWithUser(type, page1.getStart(), Page.pageSize);
+            for(Question question:allQuestion){
+                String s = stringRedisTemplate.opsForValue().get("question:view_count:" + question.getId());
+                if (s!=null) {
+                    question.setViewCount(Integer.valueOf(s));
+                }
+            }
         }
         if(sort.equals("hot")){
             allQuestion=questionMapper.findAllQuestionWithUserByHot(type,page1.getStart(),Page.pageSize);
+            for(Question question:allQuestion){
+                String s = stringRedisTemplate.opsForValue().get("question:view_count:" + question.getId());
+                if (s!=null) {
+                    question.setViewCount(Integer.valueOf(s));
+                }
+            }
         }
         if(sort.equals("await")){
             allQuestion=questionMapper.findAllQuestionWithUserByAwait(type,page1.getStart(),Page.pageSize);
+            for(Question question:allQuestion){
+                String s = stringRedisTemplate.opsForValue().get("question:view_count:" + question.getId());
+                if (s!=null) {
+                    question.setViewCount(Integer.valueOf(s));
+                }
+            }
         }
         page1.setList(allQuestion);
         page1.setTotal(total);
@@ -62,7 +82,7 @@ import java.util.List;
 
 
     /**
-     * 根据ID查询问题，评论，用户
+     * 根据ID查询问题（或帖子），评论，用户并统计阅读数
      * @param id
      * @return
      */
@@ -75,11 +95,16 @@ import java.util.List;
         // 1、查询缓存中是否有阅读记录
         String s = stringRedisTemplate.opsForValue().get("question:view_count:" + id);
         if (StringUtils.isEmpty(s)) {
-            stringRedisTemplate.opsForValue().set("question:view_count:"+id, String.valueOf(1));
+            // 如果缓存中没有，或者过期了，则从数据库中读取再添加到redis中
+            Integer viewCount = questionMapper.getViewCount(id);
+            stringRedisTemplate.opsForValue().set("question:view_count:"+id, String.valueOf(viewCount),20, TimeUnit.DAYS);
+            stringRedisTemplate.opsForValue().increment("question:view_count:"+id);
         }else{
             stringRedisTemplate.opsForValue().increment("question:view_count:"+id);
         }
-
+        String v = stringRedisTemplate.opsForValue().get("question:view_count:" + id);
+        // 将缓存中的阅读数返回给用户
+        question.setViewCount(Integer.valueOf(v));
         return question;
     }
 

@@ -15,7 +15,7 @@ import java.util.*;
 /**
  * 任务类，将阅读数同步到数据库中
  */
-public class MyJobLikeCount extends QuartzJobBean {
+public class MyJobViewCount extends QuartzJobBean {
 
 
     @Autowired
@@ -27,7 +27,6 @@ public class MyJobLikeCount extends QuartzJobBean {
     protected void executeInternal(JobExecutionContext context) throws JobExecutionException {
         Map<Integer, Integer> map = new HashMap<>();
         Set<String> keys = stringRedisTemplate.keys("question:view_count:*");
-        System.out.println(keys.toString());
         if (keys != null) {
             Iterator<String> iterator = keys.iterator(); // 遍历所有的key
             while (iterator.hasNext()) {
