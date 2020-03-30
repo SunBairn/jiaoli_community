@@ -5,6 +5,7 @@ import com.zls.service.ArticleService;
 import entity.Page;
 import entity.PageResult;
 import entity.Result;
+import entity.StatusCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import utils.PageUtils;
@@ -27,8 +28,11 @@ public class ArticleController {
     public Result findAllArticle(@RequestParam(name = "page",defaultValue = "1") int page
             ,@RequestParam(name = "sort",defaultValue = "new") String sort){
         Page<Article> allArticle = articleService.findAllArticle(page, sort);
+        if (allArticle == null) {
+            return new Result(false, StatusCode.NO_DATA_EXIST, "目标数据不存在！");
+        }
         PageResult pageResult = PageUtils.packagingPageResult(allArticle);
-        return  new Result(true,20000,"查询成功",pageResult);
+        return  new Result(true, StatusCode.OK,"查询成功",pageResult);
     }
 
 }

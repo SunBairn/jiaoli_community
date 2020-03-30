@@ -2,21 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="55cb6ed1-81af-47ec-9d74-865fad936e6e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/community-parent/community-service/src/main/java/com/zls/service/QuestionCommentService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/community-parent/community-service/src/main/java/com/zls/service/impl/QuestionCommentServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/community-parent/community-webUI/src/main/java/com/zls/controller/QuestionCommentController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/community-parent/community-common/src/main/java/utils/JWTUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/community-parent/community-common/src/main/java/utils/JWTUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/community-parent/community-common/target/classes/utils/JWTUtils.class" beforeDir="false" afterPath="$PROJECT_DIR$/community-parent/community-common/target/classes/utils/JWTUtils.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/community-parent/community-common/src/main/java/entity/StatusCode.java" beforeDir="false" afterPath="$PROJECT_DIR$/community-parent/community-common/src/main/java/entity/StatusCode.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/community-parent/community-dao/src/main/java/com/zls/mapper/QuestionCommentMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/community-parent/community-dao/src/main/java/com/zls/mapper/QuestionCommentMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/community-parent/community-dao/src/main/java/com/zls/mapper/QuestionMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/community-parent/community-dao/src/main/java/com/zls/mapper/QuestionMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/community-parent/community-dao/target/classes/com/zls/mapper/QuestionCommentMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/community-parent/community-dao/target/classes/com/zls/mapper/QuestionCommentMapper.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/community-parent/community-dao/target/classes/com/zls/mapper/QuestionMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/community-parent/community-dao/target/classes/com/zls/mapper/QuestionMapper.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/community-parent/community-service/src/main/java/com/zls/quartzJob/MyJobLikeCount.java" beforeDir="false" afterPath="$PROJECT_DIR$/community-parent/community-service/src/main/java/com/zls/quartzJob/MyJobViewCount.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/community-parent/community-service/src/main/java/com/zls/quartzJob/QuartzConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/community-parent/community-service/src/main/java/com/zls/quartzJob/QuartzConfiguration.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/community-parent/community-service/src/main/java/com/zls/service/impl/QuestionServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/community-parent/community-service/src/main/java/com/zls/service/impl/QuestionServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/community-parent/community-service/target/classes/com/zls/quartzJob/MyJobLikeCount.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/community-parent/community-service/target/classes/com/zls/quartzJob/QuartzConfiguration.class" beforeDir="false" afterPath="$PROJECT_DIR$/community-parent/community-service/target/classes/com/zls/quartzJob/QuartzConfiguration.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/community-parent/community-service/target/classes/com/zls/service/impl/QuestionServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/community-parent/community-service/target/classes/com/zls/service/impl/QuestionServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/community-parent/community-webUI/src/main/java/com/zls/filter/JwtFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/community-parent/community-webUI/src/main/java/com/zls/filter/JwtFilter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/community-parent/community-webUI/target/classes/com/zls/filter/JwtFilter.class" beforeDir="false" afterPath="$PROJECT_DIR$/community-parent/community-webUI/target/classes/com/zls/filter/JwtFilter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/community-parent/community-service/src/main/java/com/zls/service/QuestionCommentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/community-parent/community-service/src/main/java/com/zls/service/QuestionCommentService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/community-parent/community-webUI/src/main/java/com/zls/controller/ArticleController.java" beforeDir="false" afterPath="$PROJECT_DIR$/community-parent/community-webUI/src/main/java/com/zls/controller/ArticleController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/community-parent/community-webUI/src/main/java/com/zls/controller/GatheringController.java" beforeDir="false" afterPath="$PROJECT_DIR$/community-parent/community-webUI/src/main/java/com/zls/controller/GatheringController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/community-parent/community-webUI/src/main/java/com/zls/controller/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/community-parent/community-webUI/src/main/java/com/zls/controller/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/community-parent/community-webUI/src/main/java/com/zls/controller/NoticeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/community-parent/community-webUI/src/main/java/com/zls/controller/NoticeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/community-parent/community-webUI/src/main/java/com/zls/controller/QuestionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/community-parent/community-webUI/src/main/java/com/zls/controller/QuestionController.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -80,28 +78,22 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/community-parent/community-webUI/src/main/java/com/zls/filter/JwtFilter.java">
+        <entry file="file://$PROJECT_DIR$/community-parent/community-webUI/src/main/java/com/zls/controller/QuestionCommentController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="533">
-              <caret line="63" column="45" selection-start-line="63" selection-start-column="45" selection-end-line="63" selection-end-column="45" />
+            <state relative-caret-position="289">
+              <caret line="27" column="26" lean-forward="true" selection-start-line="27" selection-start-column="26" selection-end-line="27" selection-end-column="26" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/community-parent/community-service/src/main/java/com/zls/service/impl/QuestionServiceImpl.java">
+        <entry file="file://$PROJECT_DIR$/community-parent/community-webUI/src/main/java/com/zls/controller/UserController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="360">
-              <caret line="62" column="27" selection-start-line="62" selection-start-column="27" selection-end-line="62" selection-end-column="27" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/community-parent/community-dao/src/main/java/com/zls/mapper/QuestionMapper.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="253">
-              <caret line="120" column="14" lean-forward="true" selection-start-line="120" selection-start-column="14" selection-end-line="120" selection-end-column="14" />
+            <state relative-caret-position="183">
+              <caret line="74" column="26" lean-forward="true" selection-start-line="74" selection-start-column="26" selection-end-line="74" selection-end-column="26" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -110,59 +102,58 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/community-parent/community-service/src/main/java/com/zls/service/QuestionCommentService.java">
+        <entry file="file://$PROJECT_DIR$/community-parent/community-webUI/src/main/java/com/zls/filter/JwtFilter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="40">
-              <caret line="2" column="41" lean-forward="true" selection-start-line="2" selection-start-column="41" selection-end-line="2" selection-end-column="41" />
+            <state relative-caret-position="9">
+              <caret line="63" column="45" selection-start-line="63" selection-start-column="45" selection-end-line="63" selection-end-column="45" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/community-parent/community-dao/src/main/java/com/zls/mapper/QuestionCommentMapper.java">
+        <entry file="file://$PROJECT_DIR$/community-parent/community-webUI/src/main/java/com/zls/filter/ReflashJwtTokenFilter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="273">
-              <caret line="33" column="51" lean-forward="true" selection-start-line="33" selection-start-column="51" selection-end-line="33" selection-end-column="51" />
+            <state relative-caret-position="340">
+              <caret line="37" column="19" lean-forward="true" selection-start-line="37" selection-start-column="19" selection-end-line="37" selection-end-column="19" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="jar://C:/Program Files/Java/jdk1.8.0_202/jre/lib/rt.jar!/java/lang/String.class">
+        <entry file="file://$PROJECT_DIR$/community-parent/community-service/src/main/java/com/zls/service/impl/QuestionCommentServiceImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="530">
-              <caret line="205" column="19" selection-start-line="205" selection-start-column="19" selection-end-line="205" selection-end-column="19" />
+            <state relative-caret-position="269">
+              <caret line="26" column="126" lean-forward="true" selection-start-line="26" selection-start-column="126" selection-end-line="26" selection-end-column="126" />
               <folding>
-                <element signature="e#6136#6137#0" expanded="true" />
-                <element signature="e#6181#6182#0" expanded="true" />
+                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/community-parent/community-model/src/main/java/com/zls/pojo/Question.java">
+        <entry file="file://$PROJECT_DIR$/community-parent/community-webUI/src/main/java/com/zls/controller/QuestionController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="373">
-              <caret line="24" selection-start-line="24" selection-end-line="24" />
+            <state relative-caret-position="-111">
+              <caret line="41" column="74" selection-start-line="41" selection-start-column="74" selection-end-line="41" selection-end-column="74" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/data/spring-data-redis/2.1.9.RELEASE/spring-data-redis-2.1.9.RELEASE-sources.jar!/org/springframework/data/redis/core/ValueOperations.java">
+        <entry file="file://$PROJECT_DIR$/community-parent/community-webUI/src/main/java/com/zls/controller/ArticleController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="178">
-              <caret line="204" column="6" selection-start-line="204" selection-start-column="6" selection-end-line="204" selection-end-column="6" />
+            <state relative-caret-position="243">
+              <caret line="31" column="75" selection-start-line="31" selection-start-column="75" selection-end-line="31" selection-end-column="75" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/community-parent/community-common/src/main/java/utils/JWTUtils.java">
+        <entry file="file://$PROJECT_DIR$/community-parent/community-webUI/src/main/java/com/zls/controller/GatheringController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="126">
-              <caret line="67" column="17" selection-start-line="67" selection-start-column="17" selection-end-line="67" selection-end-column="17" />
+            <state relative-caret-position="323">
+              <caret line="29" column="9" lean-forward="true" selection-start-line="29" selection-start-column="9" selection-end-line="29" selection-end-column="9" />
             </state>
           </provider>
         </entry>
@@ -170,11 +161,20 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/community-parent/community-webUI/src/main/java/com/zls/controller/LoginController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1169">
-              <caret line="94" column="74" selection-start-line="94" selection-start-column="74" selection-end-line="94" selection-end-column="74" />
+            <state relative-caret-position="1049">
+              <caret line="90" column="70" lean-forward="true" selection-start-line="90" selection-start-column="70" selection-end-line="90" selection-end-column="70" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/community-parent/community-webUI/src/main/java/com/zls/controller/NoticeController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="320">
+              <caret line="24" column="74" selection-start-line="24" selection-start-column="74" selection-end-line="24" selection-end-column="74" />
             </state>
           </provider>
         </entry>
@@ -186,9 +186,9 @@
       <list>
         <option value="Enum" />
         <option value="mapper" />
-        <option value="Class" />
         <option value="MybatisMapper" />
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -208,13 +208,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/community-parent/community-upload_file/src/main/java/com/zls/file/FastDFSFile.java" />
-        <option value="$PROJECT_DIR$/community-parent/community-model/src/main/java/com/zls/pojo/ArticleTag.java" />
-        <option value="$PROJECT_DIR$/community-parent/community-model/src/main/java/com/zls/pojo/Attention.java" />
-        <option value="$PROJECT_DIR$/community-parent/community-model/src/main/java/com/zls/pojo/Collection.java" />
-        <option value="$PROJECT_DIR$/community-parent/community-model/src/main/java/com/zls/pojo/Column.java" />
-        <option value="$PROJECT_DIR$/community-parent/community-model/src/main/java/com/zls/pojo/Recruit.java" />
-        <option value="$PROJECT_DIR$/community-parent/community-dao/src/main/java/com/zls/mapper/NoticeMapper.java" />
         <option value="$PROJECT_DIR$/community-parent/community-model/src/main/java/com/zls/pojo/Admin.java" />
         <option value="$PROJECT_DIR$/community-parent/community-model/src/main/java/com/zls/pojo/ArticleComment.java" />
         <option value="$PROJECT_DIR$/community-parent/community-webUI/src/main/java/com/zls/filter/AutoLoginFilter.java" />
@@ -228,7 +221,6 @@
         <option value="$PROJECT_DIR$/community-parent/community-dao/src/main/java/com/zls/mapper/UserMapper.java" />
         <option value="$PROJECT_DIR$/community-parent/community-common/src/test/java/MD5Test.java" />
         <option value="$PROJECT_DIR$/community-parent/community-common/src/main/java/utils/GetHostIp.java" />
-        <option value="$PROJECT_DIR$/community-parent/community-webUI/src/main/java/com/zls/controller/QuestionController.java" />
         <option value="$PROJECT_DIR$/community-parent/community-service/src/main/java/com/zls/service/QuestionService.java" />
         <option value="$PROJECT_DIR$/community-parent/community-service/src/main/resources/application.yml" />
         <option value="$PROJECT_DIR$/community-parent/community-service/pom.xml" />
@@ -247,7 +239,6 @@
         <option value="$PROJECT_DIR$/community-parent/community-service/src/main/java/com/zls/service/impl/UserServiceImpl.java" />
         <option value="$PROJECT_DIR$/community-parent/community-service/src/main/java/com/zls/quartzJob/MyJobLikeCount.java" />
         <option value="$PROJECT_DIR$/community-parent/community-webUI/src/main/java/com/zls/filter/ReflashJwtTokenFilter.java" />
-        <option value="$PROJECT_DIR$/community-parent/community-webUI/src/main/java/com/zls/controller/LoginController.java" />
         <option value="$PROJECT_DIR$/community-parent/community-dao/src/main/resources/mapper/QuestionMapper.xml" />
         <option value="$PROJECT_DIR$/community-parent/community-webUI/src/main/resources/application.yml" />
         <option value="$PROJECT_DIR$/community-parent/community-webUI/src/main/java/com/zls/confige/ApplicationConfig.java" />
@@ -257,8 +248,17 @@
         <option value="$PROJECT_DIR$/community-parent/community-webUI/src/main/java/com/zls/filter/JwtFilter.java" />
         <option value="$PROJECT_DIR$/community-parent/community-model/src/main/java/com/zls/pojo/Question.java" />
         <option value="$PROJECT_DIR$/community-parent/community-service/src/main/java/com/zls/service/impl/QuestionServiceImpl.java" />
-        <option value="$PROJECT_DIR$/community-parent/community-dao/src/main/java/com/zls/mapper/QuestionCommentMapper.java" />
         <option value="$PROJECT_DIR$/community-parent/community-dao/src/main/java/com/zls/mapper/QuestionMapper.java" />
+        <option value="$PROJECT_DIR$/community-parent/community-webUI/src/main/java/com/zls/controller/QuestionCommentController.java" />
+        <option value="$PROJECT_DIR$/community-parent/community-dao/src/main/java/com/zls/mapper/QuestionCommentMapper.java" />
+        <option value="$PROJECT_DIR$/community-parent/community-service/src/main/java/com/zls/service/QuestionCommentService.java" />
+        <option value="$PROJECT_DIR$/community-parent/community-service/src/main/java/com/zls/service/impl/QuestionCommentServiceImpl.java" />
+        <option value="$PROJECT_DIR$/community-parent/community-common/src/main/java/entity/StatusCode.java" />
+        <option value="$PROJECT_DIR$/community-parent/community-webUI/src/main/java/com/zls/controller/ArticleController.java" />
+        <option value="$PROJECT_DIR$/community-parent/community-webUI/src/main/java/com/zls/controller/GatheringController.java" />
+        <option value="$PROJECT_DIR$/community-parent/community-webUI/src/main/java/com/zls/controller/LoginController.java" />
+        <option value="$PROJECT_DIR$/community-parent/community-webUI/src/main/java/com/zls/controller/NoticeController.java" />
+        <option value="$PROJECT_DIR$/community-parent/community-webUI/src/main/java/com/zls/controller/QuestionController.java" />
       </list>
     </option>
   </component>
@@ -337,6 +337,23 @@
             <path>
               <item name="jiaoli-community" type="b2602c69:ProjectViewProjectNode" />
               <item name="community-parent" type="462c0819:PsiDirectoryNode" />
+              <item name="community-common" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="jiaoli-community" type="b2602c69:ProjectViewProjectNode" />
+              <item name="community-parent" type="462c0819:PsiDirectoryNode" />
+              <item name="community-common" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="entity" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="jiaoli-community" type="b2602c69:ProjectViewProjectNode" />
+              <item name="community-parent" type="462c0819:PsiDirectoryNode" />
               <item name="community-dao" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -410,6 +427,41 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="test" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="jiaoli-community" type="b2602c69:ProjectViewProjectNode" />
+              <item name="community-parent" type="462c0819:PsiDirectoryNode" />
+              <item name="community-model" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="jiaoli-community" type="b2602c69:ProjectViewProjectNode" />
+              <item name="community-parent" type="462c0819:PsiDirectoryNode" />
+              <item name="community-model" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="jiaoli-community" type="b2602c69:ProjectViewProjectNode" />
+              <item name="community-parent" type="462c0819:PsiDirectoryNode" />
+              <item name="community-model" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="jiaoli-community" type="b2602c69:ProjectViewProjectNode" />
+              <item name="community-parent" type="462c0819:PsiDirectoryNode" />
+              <item name="community-model" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="jiaoli-community" type="b2602c69:ProjectViewProjectNode" />
+              <item name="community-parent" type="462c0819:PsiDirectoryNode" />
+              <item name="community-model" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="pojo" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="jiaoli-community" type="b2602c69:ProjectViewProjectNode" />
@@ -817,7 +869,7 @@
       <workItem from="1583127853855" duration="74788000" />
       <workItem from="1584014707216" duration="51868000" />
       <workItem from="1584586238002" duration="114975000" />
-      <workItem from="1585221926909" duration="85547000" />
+      <workItem from="1585221926909" duration="96073000" />
     </task>
     <servers />
   </component>
@@ -854,7 +906,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="329492000" />
+    <option name="totallyTimeSpent" value="340018000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -867,8 +919,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="848" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.22401074" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.22401074" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="UI Designer" order="3" />
@@ -876,7 +929,7 @@
       <window_info id="Web" order="5" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32914925" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49899396" weight="0.36541143" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49899396" visible="true" weight="0.23152022" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.36541143" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -900,6 +953,39 @@
       <window_info anchor="right" id="Database" order="7" weight="0.23004694" />
       <window_info anchor="right" id="Maven" order="8" weight="0.32662642" />
     </layout>
+    <layout-to-restore>
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.22401074" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Designer" order="2" />
+      <window_info id="UI Designer" order="3" />
+      <window_info id="Favorites" order="4" side_tool="true" />
+      <window_info id="Web" order="5" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32914925" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49899396" visible="true" weight="0.36541143" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.36541143" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.32914925" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="8" />
+      <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Spring" order="10" />
+      <window_info anchor="bottom" id="Terminal" order="11" weight="0.32914925" />
+      <window_info anchor="bottom" id="Event Log" order="12" sideWeight="0.501006" side_tool="true" weight="0.30822873" />
+      <window_info anchor="bottom" id="Database Console" order="13" weight="0.32914925" />
+      <window_info anchor="bottom" id="Messages" order="14" weight="0.32914925" />
+      <window_info anchor="bottom" id="Java Enterprise" order="15" />
+      <window_info anchor="right" id="Bean Validation" order="0" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="1" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="2" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="3" weight="0.25" />
+      <window_info anchor="right" id="Palette" order="4" />
+      <window_info anchor="right" id="Mybatis datasource" order="5" side_tool="true" />
+      <window_info anchor="right" id="Palette&#9;" order="6" />
+      <window_info anchor="right" id="Database" order="7" weight="0.23004694" />
+      <window_info anchor="right" id="Maven" order="8" weight="0.32662642" />
+    </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
@@ -917,63 +1003,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/community-parent/community-dao/src/main/java/com/zls/dynaSqlProvider/QuestionDynaSqlProvider.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="241">
-          <caret line="19" column="35" lean-forward="true" selection-start-line="19" selection-start-column="35" selection-end-line="19" selection-end-column="35" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/community-parent/community-dao/src/main/resources/MybatisGenerator.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-253" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/community-parent/community-dao/src/main/java/com/zls/mapper/UserMapper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="32" column="53" selection-start-line="32" selection-start-column="53" selection-end-line="32" selection-end-column="53" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/community-parent/community-dao/src/main/resources/QuestionMapper.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="260">
-          <caret line="13" column="9" lean-forward="true" selection-start-line="13" selection-start-column="9" selection-end-line="13" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/mybatis/mybatis-spring/2.0.1/mybatis-spring-2.0.1-sources.jar!/org/mybatis/spring/SqlSessionTemplate.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="191">
-          <caret line="443" selection-start-line="443" selection-end-line="443" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/mybatis/mybatis/3.5.1/mybatis-3.5.1-sources.jar!/org/apache/ibatis/session/defaults/DefaultSqlSession.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="191">
-          <caret line="201" selection-start-line="201" selection-end-line="201" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/mybatis/mybatis/3.5.1/mybatis-3.5.1-sources.jar!/org/apache/ibatis/executor/SimpleExecutor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="131">
-          <caret line="52" selection-start-line="52" selection-end-line="52" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/mybatis/mybatis/3.5.1/mybatis-3.5.1-sources.jar!/org/apache/ibatis/builder/annotation/ProviderSqlSource.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="131">
-          <caret line="140" selection-start-line="140" selection-end-line="140" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/org/mybatis/mybatis/3.5.1/mybatis-3.5.1-sources.jar!/org/apache/ibatis/jdbc/SQL.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="117">
@@ -1078,16 +1107,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/community-parent/community-webUI/src/main/java/com/zls/controller/UserController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="861">
-          <caret line="77" column="35" selection-start-line="77" selection-start-column="35" selection-end-line="77" selection-end-column="35" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/data/spring-data-redis/2.1.9.RELEASE/spring-data-redis-2.1.9.RELEASE-sources.jar!/org/springframework/data/redis/core/RedisOperations.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="167">
@@ -1131,13 +1150,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/community-parent/community-webUI/src/main/java/com/zls/filter/ReflashJwtTokenFilter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="38" column="55" lean-forward="true" selection-start-line="38" selection-start-column="55" selection-end-line="38" selection-end-column="55" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/org/apache/tomcat/embed/tomcat-embed-core/9.0.21/tomcat-embed-core-9.0.21-sources.jar!/javax/servlet/http/Cookie.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-33">
@@ -1156,13 +1168,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="140">
           <caret line="12" column="8" selection-start-line="12" selection-start-column="8" selection-end-line="12" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/community-parent/community-webUI/src/main/java/com/zls/controller/ArticleController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="140">
-          <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
         </state>
       </provider>
     </entry>
@@ -1221,23 +1226,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/community-parent/community-webUI/src/main/java/com/zls/controller/LoginController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1169">
-          <caret line="94" column="74" selection-start-line="94" selection-start-column="74" selection-end-line="94" selection-end-column="74" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/community-parent/community-webUI/src/main/java/com/zls/filter/JwtFilter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="533">
-          <caret line="63" column="45" selection-start-line="63" selection-start-column="45" selection-end-line="63" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/data/spring-data-redis/2.1.9.RELEASE/spring-data-redis-2.1.9.RELEASE-sources.jar!/org/springframework/data/redis/core/ValueOperations.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="178">
@@ -1284,13 +1272,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/community-parent/community-dao/src/main/java/com/zls/mapper/QuestionCommentMapper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="273">
-          <caret line="33" column="51" lean-forward="true" selection-start-line="33" selection-start-column="51" selection-end-line="33" selection-end-column="51" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/community-parent/community-dao/src/main/java/com/zls/mapper/QuestionMapper.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="253">
@@ -1301,10 +1282,123 @@
         </state>
       </provider>
     </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_202/jre/lib/rt.jar!/java/util/List.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1228">
+          <caret line="12" column="12" selection-start-line="12" selection-start-column="12" selection-end-line="12" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/community-parent/community-model/src/main/java/com/zls/pojo/QuestionComment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="280">
+          <caret line="16" column="27" lean-forward="true" selection-start-line="16" selection-start-column="27" selection-end-line="16" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/community-parent/community-service/src/main/java/com/zls/service/QuestionCommentService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="40">
-          <caret line="2" column="41" lean-forward="true" selection-start-line="2" selection-start-column="41" selection-end-line="2" selection-end-column="41" />
+        <state relative-caret-position="440">
+          <caret line="22" column="28" selection-start-line="22" selection-start-column="28" selection-end-line="22" selection-end-column="28" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/community-parent/community-dao/src/main/java/com/zls/mapper/QuestionCommentMapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="529">
+          <caret line="39" column="21" lean-forward="true" selection-start-line="39" selection-start-column="7" selection-end-line="39" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/community-parent/community-service/src/main/java/com/zls/service/impl/QuestionCommentServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="269">
+          <caret line="26" column="126" lean-forward="true" selection-start-line="26" selection-start-column="126" selection-end-line="26" selection-end-column="126" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/community-parent/community-common/src/main/java/entity/StatusCode.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="280">
+          <caret line="14" column="67" selection-start-line="14" selection-start-column="67" selection-end-line="14" selection-end-column="67" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/community-parent/community-webUI/src/main/java/com/zls/controller/ArticleController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="243">
+          <caret line="31" column="75" selection-start-line="31" selection-start-column="75" selection-end-line="31" selection-end-column="75" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/community-parent/community-webUI/src/main/java/com/zls/controller/GatheringController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="29" column="9" lean-forward="true" selection-start-line="29" selection-start-column="9" selection-end-line="29" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/community-parent/community-webUI/src/main/java/com/zls/controller/NoticeController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="320">
+          <caret line="24" column="74" selection-start-line="24" selection-start-column="74" selection-end-line="24" selection-end-column="74" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/community-parent/community-webUI/src/main/java/com/zls/controller/QuestionCommentController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="27" column="26" lean-forward="true" selection-start-line="27" selection-start-column="26" selection-end-line="27" selection-end-column="26" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/community-parent/community-webUI/src/main/java/com/zls/controller/QuestionController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-111">
+          <caret line="41" column="74" selection-start-line="41" selection-start-column="74" selection-end-line="41" selection-end-column="74" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/community-parent/community-webUI/src/main/java/com/zls/controller/UserController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="183">
+          <caret line="74" column="26" lean-forward="true" selection-start-line="74" selection-start-column="26" selection-end-line="74" selection-end-column="26" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/community-parent/community-webUI/src/main/java/com/zls/filter/ReflashJwtTokenFilter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="37" column="19" lean-forward="true" selection-start-line="37" selection-start-column="19" selection-end-line="37" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/community-parent/community-webUI/src/main/java/com/zls/controller/LoginController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1049">
+          <caret line="90" column="70" lean-forward="true" selection-start-line="90" selection-start-column="70" selection-end-line="90" selection-end-column="70" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/community-parent/community-webUI/src/main/java/com/zls/filter/JwtFilter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="9">
+          <caret line="63" column="45" selection-start-line="63" selection-start-column="45" selection-end-line="63" selection-end-column="45" />
         </state>
       </provider>
     </entry>

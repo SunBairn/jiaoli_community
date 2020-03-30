@@ -13,26 +13,33 @@ import java.util.List;
 @Repository public interface QuestionCommentMapper {
 
     /**
-     * 根据parent_id查询所有一级评论(按时间倒序)（包含部分用户信息）
+     * 根据parent_id查询所有评论(按时间倒序)（包含部分用户信息）
      * @param parentId
      * @return
      */
-    @Select("select * from tb_question_comment where parent_id=#{parentId} and type=1")
+    @Select("select * from tb_question_comment where parent_id=#{parentId} and type=#{type}")
     @Results({
             @Result(column = "commentator",property = "user",one =@One(select = "com.zls.mapper.UserMapper.findByIdPortion"))
     })
-    List<QuestionComment> findCommentWithUserById(@Param("parentId") Integer parentId);
+    List<QuestionComment> findCommentWithUserByParentId(@Param("parentId") Integer parentId,@Param("type") Integer type);
 
 
     /**
-     * 根据parent_id分页查询一级评论默认10个(按时间倒序)（包含部分用户信息）
+     * 根据parent_id分页查询评论默认10个(按时点赞数倒序)（包含部分用户信息）
      * @param parentId
      * @return
      */
-    @Select("select * from tb_question_comment where parent_id=#{parentId} and type=1 group by gmt_create limit #{page}*10,10")
+    @Select("select * from tb_question_comment where parent_id=#{parentId}  and type=#{type}  order by like_count desc limit #{start} ,10")
     @Results({
             @Result(column = "commentator",property = "user",one =@One(select = "com.zls.mapper.UserMapper.findByIdPortion"))
     })
-    List<QuestionComment> pageFindCommentWithUserById(@Param("parentId") Integer parentId,@Param("page") Integer page);
+    List<QuestionComment> pageFindCommentWithUserByParentId(@Param("parentId") Integer parentId,@Param("type") Integer type,@Param("start") Integer start);
 
+
+    /**
+     * 统计某个问题或帖子的总评论数
+     * @param parentId 父类ID
+     */
+    @Select("select count(1) from tb_question_comment where parent_id = #{parentId}  ")
+    Long getCountByParentId(@Param("parentId") Integer parentId);
 }

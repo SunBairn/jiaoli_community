@@ -109,6 +109,9 @@ public class LoginController {
     @GetMapping("/reflashToken")
     public Result reflashToken(@RequestParam("userId")String userId,@RequestParam("nickname") String nickname){
         String token = JWTUtils.createJWT(userId, nickname, null, "user");
+        if (token==null){
+            return new Result(false, StatusCode.ERROR, "刷新token失败");
+        }
         return new Result(true, StatusCode.OK, "刷新token成功", token);
     }
 
