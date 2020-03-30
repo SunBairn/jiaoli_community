@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/community-parent" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/community-parent/community-admin" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/community-parent/community-common" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/community-parent/community-dao" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/community-parent/community-model" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/community-parent/community-rabbitmq" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/community-parent/community-service" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/community-parent/community-uploadFile" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/community-parent/community-upload_file" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/community-parent/community-webUI" charset="UTF-8" />
+  </component>
+</project>

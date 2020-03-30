@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zls.mapper.QuestionMapper">
+    <update id="syncViewCountToDatabase" parameterType="map">
+        update tb_question
+        set view_count = case id
+        <foreach collection="map.entrySet()" index="key" item="value">
+            when #{key} then #{value}
+        </foreach>
+        end
+        where id in
+        <foreach collection="map" index="key"
+                 open="(" close=")" separator=",">
+            #{key}
+        </foreach>
+    </update>
+
+
+
+</mapper>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="community-rabbitmq" />
+        <module name="community-common" />
+        <module name="community-upload_file" />
+        <module name="community-webUI" />
+        <module name="community-service" />
+        <module name="community-model" />
+        <module name="community-dao" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="community-admin" target="1.8" />
+      <module name="community-admini" target="1.8" />
+      <module name="community-uploadFile" target="1.8" />
+      <module name="jiaoli-community" target="1.5" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="community-admin" options="-parameters" />
+      <module name="community-admini" options="-parameters" />
+      <module name="community-common" options="-parameters" />
+      <module name="community-dao" options="-parameters" />
+      <module name="community-model" options="-parameters" />
+      <module name="community-rabbitmq" options="-parameters" />
+      <module name="community-service" options="-parameters" />
+      <module name="community-uploadFile" options="-parameters" />
+      <module name="community-upload_file" options="-parameters" />
+      <module name="community-webUI" options="-parameters" />
+    </option>
+  </component>
+</project>

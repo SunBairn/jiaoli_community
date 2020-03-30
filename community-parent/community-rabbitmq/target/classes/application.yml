@@ -1,0 +1,15 @@
+spring:
+  rabbitmq:
+    host: 192.168.155.129
+    username: guest
+    password: guest
+
+aliyun:
+  sms:
+    accessKeyId: LTAI4Fma3bTX7z16FVGrcNU9
+    accessKeySecret: XQbr3O6Yl3JqN5bBVJb8zWDZyoKTs4
+    template_code: SMS_185810657
+    sing_name: 交理论坛
+
+server:
+  port: 9999
