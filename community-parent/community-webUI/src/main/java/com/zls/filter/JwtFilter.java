@@ -42,17 +42,17 @@ public class JwtFilter extends HandlerInterceptorAdapter {
                 // 判断是否过期且需不需要刷新token
                 // 1、从Redis中取出用户数据，如果为空，说明用户没有登录，不生成token
                 String id = request.getHeader("id");
-                Map<String,String> entries = redisTemplate.opsForHash().entries("user:" + id);
+                Map entries = redisTemplate.opsForHash().entries("user:" + id);
                 if (!entries.isEmpty()){
                     // 2、如果不为空，则刷新token
-                    final String jwttoken = JWTUtils.createJWT(entries.get("id"), entries.get("nickname"), null, "user");
+                    String jwttoken = JWTUtils.createJWT( entries.get("id")+"", entries.get("nickname")+"", null, "user");
                     // 3、重新生成jwttoken后重置redis中的用户信息
                     redisTemplate.opsForHash().put("user:"+entries.get("id"),"id",entries.get("id"));
                     redisTemplate.opsForHash().put("user:"+entries.get("id"),"nickname",entries.get("nickname"));
                     redisTemplate.expire("user:" + entries.get("id"), 2, TimeUnit.DAYS);
                     // 4、将jwt存到cookie中
                     Cookie cookie=new Cookie("jwttoken",token);
-                    cookie.setMaxAge(60*60*2);
+                    cookie.setMaxAge(1000*60*60*2);
                     response.addCookie(cookie);
                     try {
                         // 重新解析给用户权限

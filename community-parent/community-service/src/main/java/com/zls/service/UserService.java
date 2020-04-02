@@ -2,6 +2,7 @@ package com.zls.service;
 
 import com.zls.pojo.User;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.Map;
 
 public interface UserService {
@@ -58,4 +59,5 @@ public interface UserService {
      * @param id
      */
     void deleteUser(Integer id);
+
 }

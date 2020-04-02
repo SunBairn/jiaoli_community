@@ -42,4 +42,25 @@ import java.util.List;
      */
     @Select("select count(1) from tb_question_comment where parent_id = #{parentId}  ")
     Long getCountByParentId(@Param("parentId") Integer parentId);
+
+
+    /**
+     * 添加评论
+     * @param questionComment  问题评论
+     * @return
+     */
+    @Insert("insert into tb_question_comment (content, parent_id, type, commentator, gmt_create , question_id) value " +
+            "(#{questionComment.content} ," +
+            "#{questionComment.parentId} ,#{questionComment.type} ,#{questionComment.commentator} ," +
+            "#{questionComment.gmtCreate},#{questionComment.questionId} )")
+    boolean addComment(@Param("questionComment") QuestionComment questionComment);
+
+
+    /**
+     * 给评论点赞
+     * @param commentId 评论ID
+     * @return
+     */
+    @Update("update tb_question_comment set reply_count=reply_count+1 where id=#{commentId} ")
+    boolean incrementReplyCount(@Param("commentId") Integer commentId);
 }

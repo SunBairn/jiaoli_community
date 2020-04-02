@@ -11,8 +11,11 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 import utils.MD5Utils;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
@@ -117,27 +120,37 @@ public class UserServiceImpl implements UserService {
         String MD5password = MD5Utils.MD5Encode(password);
         User user = userMapper.findByMobileAndPassword(mobile,MD5password);
         if (user!=null){
-            // 这里前端使用了sessionStorage存储用户的ID和昵称，所以这里不需要了
-            // 如果用户不为空，则存入Redis中
-            //1、将用户的信息redis中(这里的目的是可以直接从缓存中拿用于刷新jwttoken)
-//            Map<String, String> map1 = new HashMap<>();
-//            map1.put("id",  user.getId().toString());
-//            map1.put("nickname", user.getNickname());
             String jiaoliToken = UUID.randomUUID().toString();
+            String s = null;
             // 存的自动登录所需要的token
-            String s = stringRedisTemplate.opsForValue().get("jiaoliToken_" + oldJiaoliToken);
+            if (!StringUtils.isEmpty(oldJiaoliToken)){
+                 s = stringRedisTemplate.opsForValue().get("jiaoliToken_" + oldJiaoliToken);
+            }
             if (s!=null&&s.equals(oldJiaoliToken)){
+                // 这里是防止用户重新登录后缓存中会多出很多没用jiaolitoken
+                // 这里必须要将老的jiaolitoken设置过期
+                // 这里是用户重新登录进来后得到了新的jiaolitoken,所以我们需要更新缓存中的token
                 Boolean expire = stringRedisTemplate.expire("jiaoliToken_" + oldJiaoliToken, -1, TimeUnit.MINUTES.SECONDS);
                 Boolean expire1 = stringRedisTemplate.expire(oldJiaoliToken, -1, TimeUnit.MINUTES.SECONDS);
-                if (!expire && !expire1) {
+                if (!expire || !expire1) {
                     throw new CustomizeException(CustomizeErrorCode.REDIS_EXPIRE_ERROR);
                 }
             }
+
+            // 存储的用于下次自动登录的jiaolitoken
             stringRedisTemplate.opsForValue().set("jiaoliToken_"+jiaoliToken,jiaoliToken,20,TimeUnit.DAYS);
 
             // 存的用户ID，用与直接可以通过缓存获取用户信息
             stringRedisTemplate.opsForValue().set(jiaoliToken,user.getId().toString(),20,TimeUnit.DAYS);
-
+            // 登录成功后将用户的id和昵称存到redis中，便于生成jwttoken时使用(过期时间为2天)
+            if (redisTemplate.opsForHash().hasKey("user:"+user.getId(),"id")==true){
+                // 如果用户信息已经在缓存中，则直接刷新过期时间即可
+                redisTemplate.expire("user:" + user.getId(), 2, TimeUnit.DAYS);
+            }else{
+                redisTemplate.opsForHash().put("user:"+user.getId(),"id",user.getId());
+                redisTemplate.opsForHash().put("user:"+user.getId(),"nickname",user.getNickname());
+                redisTemplate.expire("user:" + user.getId(), 2, TimeUnit.DAYS);
+            }
             Map<String, Object> map2 = new HashMap<>();
             map2.put("user", user);
             map2.put("jiaoliToken", jiaoliToken);
@@ -168,6 +181,7 @@ public class UserServiceImpl implements UserService {
                          stringRedisTemplate.opsForValue().set("jiaoliToken_"+jiaoliToken1,jiaoliToken1,20,TimeUnit.DAYS);
                          // 将原先redis中的token设置过期
                          Boolean expire = stringRedisTemplate.expire("jiaoliToken_" + jiaoliToken, -1, TimeUnit.SECONDS);
+
                          if (!expire){
                              throw new CustomizeException(CustomizeErrorCode.REDIS_EXPIRE_ERROR);
                          }
@@ -179,7 +193,15 @@ public class UserServiceImpl implements UserService {
                              throw new CustomizeException(CustomizeErrorCode.REDIS_EXPIRE_ERROR);
                          }
                          // 存的用户信息
-                     //    redisTemplate.opsForHash().putAll("user_"+user.getId(),map1);
+                         // 登录成功后将用户的id和昵称存到redis中，便于生成jwttoken时使用(过期时间为2天)
+                         if (redisTemplate.opsForHash().hasKey("user:"+user.getId(),"id")==true){
+                             // 如果用户信息已经在缓存中，则直接刷新过期时间即可
+                             redisTemplate.expire("user:" + user.getId(), 2, TimeUnit.DAYS);
+                         }else {
+                             redisTemplate.opsForHash().put("user:"+user.getId(),"id",user.getId());
+                             redisTemplate.opsForHash().put("user:"+user.getId(),"nickname",user.getNickname());
+                             redisTemplate.expire("user:" + user.getId(), 2, TimeUnit.DAYS);
+                         }
                          Map<String, Object> map2 = new HashMap<>();
                          map2.put("user", user);
                          map2.put("jiaoliToken", jiaoliToken1);
@@ -194,7 +216,7 @@ public class UserServiceImpl implements UserService {
 
     /**
      * 根据用户ID去查询某个用户的信息
-     * @param id
+     * @param id  userId
      * @return
      */
     public User findById(Integer id){

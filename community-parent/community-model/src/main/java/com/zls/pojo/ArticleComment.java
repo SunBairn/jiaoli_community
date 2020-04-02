@@ -11,8 +11,8 @@ import java.io.Serializable;
 public class ArticleComment implements Serializable {
     // 评论ID
     private Integer id ;
-    private Integer articleId;
     private String content;
+    private Integer articleId; // 文章ID
     private Integer userId;
     // 1代表评论，2代表回复
     private Integer type;
@@ -20,5 +20,7 @@ public class ArticleComment implements Serializable {
     private Integer parentId;
     // 发布时间
     private Long publishdate;
-    private Long likeCount;
+    private Integer likeCount;
+    // 评论的回复数
+    private Integer replyCount;
 }

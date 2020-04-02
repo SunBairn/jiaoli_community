@@ -1,6 +1,5 @@
 package com.zls.confige;
 
-import com.zls.filter.ReflashJwtTokenFilter;
 import com.zls.filter.JwtFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -18,8 +17,6 @@ public class ApplicationConfig extends WebMvcConfigurationSupport {
 
     @Autowired
     JwtFilter jwtFilter;
-    @Autowired
-    ReflashJwtTokenFilter autoLoginFilter;
 
     public void addInterceptors(InterceptorRegistry registry) {
         List<String> list = new ArrayList<>();
@@ -27,8 +24,6 @@ public class ApplicationConfig extends WebMvcConfigurationSupport {
         list.add("/**/autoLogin");
         list.add("/**/find/**");
         list.add("/**/user/check");
-//        registry.addInterceptor(autoLoginFilter)
-//                .addPathPatterns("/**");
         registry.addInterceptor(jwtFilter)
                 .addPathPatterns("/**")  //需要拦截的路径
                 .excludePathPatterns(list);  // 不需要拦截的路径

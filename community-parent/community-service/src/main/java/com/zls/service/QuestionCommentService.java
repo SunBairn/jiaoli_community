@@ -19,9 +19,31 @@ public interface QuestionCommentService {
     List<QuestionComment> pageFindCommentWithUserByParentId(Integer parentId,Integer type,Integer page);
 
     /**
+     * 根据 parentId 查询所有回复
+     * @param parentId 父类ID
+     * @return
+     */
+    List<QuestionComment> findAllReplyByParentId(Integer parentId);
+
+    /**
      *统计某个问题或帖子的总评论数
      * @param parentId  父类ID
      * @return
      */
     Long getCountByParentId(Integer parentId);
+
+
+    /**
+     * 实现评论(只有一级评论有)点赞功能
+     * @param commentId  评论ID
+     * @param liketor 点赞者ID
+     */
+    boolean likeComment(Integer commentId,Integer liketor);
+
+    /**
+     * 添加评论
+     * @param questionComment 问题评论
+     * @return
+     */
+    boolean addComment(QuestionComment questionComment);
 }

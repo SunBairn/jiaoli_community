@@ -3,6 +3,7 @@ package com.zls.service.impl;
 import com.zls.mapper.QuestionMapper;
 import com.zls.pojo.Question;
 import com.zls.service.QuestionService;
+import com.zls.utils.RedisServiceExtend;
 import entity.Page;
 import enums.CustomizeErrorCode;
 import enums.CustomizeException;
@@ -25,6 +26,22 @@ import java.util.concurrent.TimeUnit;
     private QuestionMapper questionMapper;
     @Autowired
     private StringRedisTemplate stringRedisTemplate;
+    @Autowired
+    RedisServiceExtend redisServiceExtend;
+
+    /**
+     * 添加问题
+     * @param question 问题实体
+     * @return
+     */
+    @Override
+    public boolean addQuestion(Question question) {
+        boolean b = questionMapper.addQuestion(question);
+        if (b) {
+            return true;
+        }
+        return false;
+    }
 
     /**
      * 分页查询所有,根据传过来的sort参数进行指定排序
@@ -41,9 +58,15 @@ import java.util.concurrent.TimeUnit;
         if(sort.equals("new")) {
             allQuestion = questionMapper.findAllQuestionWithUser(type, page1.getStart(), Page.pageSize);
             for(Question question:allQuestion){
+                // 查询阅读数在缓存中有没有
                 String s = stringRedisTemplate.opsForValue().get("question:view_count:" + question.getId());
                 if (s!=null) {
                     question.setViewCount(Integer.valueOf(s));
+                }
+                // 查询点赞数在缓存中有没有
+                Boolean aBoolean = stringRedisTemplate.hasKey("question:like_count:" + question.getId());
+                if (aBoolean) {
+                    question.setLikeCount(redisServiceExtend.bitCount("question:like_count:"+question.getId()));
                 }
             }
         }
@@ -54,14 +77,26 @@ import java.util.concurrent.TimeUnit;
                 if (s!=null) {
                     question.setViewCount(Integer.valueOf(s));
                 }
+                // 查询点赞数在缓存中有没有
+                Boolean aBoolean = stringRedisTemplate.hasKey("question:like_count:" + question.getId());
+                if (aBoolean) {
+                    question.setLikeCount(redisServiceExtend.bitCount("question:like_count:"+question.getId()));
+                }
             }
         }
         if(sort.equals("await")){
             allQuestion=questionMapper.findAllQuestionWithUserByAwait(type,page1.getStart(),Page.pageSize);
+            // 循环遍历缓存中有没有阅读数
             for(Question question:allQuestion){
                 String s = stringRedisTemplate.opsForValue().get("question:view_count:" + question.getId());
                 if (s!=null) {
                     question.setViewCount(Integer.valueOf(s));
+                }
+                // 查询点赞数在缓存中有没有
+                Boolean aBoolean = stringRedisTemplate.hasKey("question:like_count:" + question.getId());
+                // 有的话返回false
+                if (aBoolean) {
+                    question.setLikeCount(redisServiceExtend.bitCount("question:like_count:"+question.getId()));
                 }
             }
         }
@@ -82,8 +117,8 @@ import java.util.concurrent.TimeUnit;
 
 
     /**
-     * 根据ID查询问题（或帖子），评论，用户并统计阅读数
-     * @param id
+     * 根据ID查询问题（或帖子），评论，用户并统计阅读数和点赞数
+     * @param id  questionID
      * @return
      */
     public Question findQuestionWithUserWithCommentById(Integer id){
@@ -102,10 +137,49 @@ import java.util.concurrent.TimeUnit;
         }else{
             stringRedisTemplate.opsForValue().increment("question:view_count:"+id);
         }
-        String v = stringRedisTemplate.opsForValue().get("question:view_count:" + id);
+        // 避免出现EOF异常
+        String v = stringRedisTemplate.boundValueOps("question:view_count:" + id).get(0,-1);
         // 将缓存中的阅读数返回给用户
         question.setViewCount(Integer.valueOf(v));
+        // 将缓存中点赞数返回给用户
+        Integer integer = redisServiceExtend.bitCount("question:like_count:" + id);
+        if (integer!=null){
+            question.setLikeCount(integer);
+        }
         return question;
+    }
+
+    /**
+     *  实现问题（帖子）点赞功能
+     * @param questionId  问题ID
+     * @param liketor 点赞者ID
+     */
+    @Override
+    public boolean likeQuestion(Integer questionId, Integer liketor) {
+        // 先从Redis中查找该用户有没有已经点赞了该问题或帖子
+        Boolean flag = stringRedisTemplate.opsForValue().getBit("question:like_count:" + questionId, liketor);
+        if (flag){
+          return false;
+        }
+        Boolean aBoolean = stringRedisTemplate.opsForValue().setBit("question:like_count:" + questionId, liketor, true);
+        if (aBoolean){
+            throw new CustomizeException(CustomizeErrorCode.LIKE_FAILED);
+        }
+        return true;
+    }
+
+    /**
+     * 增加评论数+1
+     * @param questionId 问题ID
+     * @return
+     */
+    @Override
+    public boolean incrementCommentCount(Integer questionId) {
+        Boolean aBoolean = questionMapper.incrementCommentCount(questionId);
+        if (aBoolean) {
+            return true;
+        }
+        return false;
     }
 
 

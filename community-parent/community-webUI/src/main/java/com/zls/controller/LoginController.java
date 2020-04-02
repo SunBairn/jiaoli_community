@@ -35,9 +35,11 @@ public class LoginController {
         // 防止用户重新登录，在redis缓存中存入重复的token
         Cookie[] cookies = request.getCookies();
         String jiaoliToken1=null ;
-        for (Cookie cookie : cookies) {
-            if ("jiaoli_token".equals(cookie.getName())) {
-                jiaoliToken1 = cookie.getValue();
+        if (cookies!=null){
+            for (Cookie cookie : cookies) {
+                if ("jiaoli_token".equals(cookie.getName())) {
+                    jiaoliToken1 = cookie.getValue();
+                }
             }
         }
         Map<String, Object> map2 = userService.findByMobileAndPassword(map,jiaoliToken1);
@@ -50,13 +52,8 @@ public class LoginController {
             map1.put("userId", user.getId()+"");
             map1.put("nickname", user.getNickname());
             map1.put("avatar", user.getAvatar());
-            // 用于自动登录存储在token中的值
+            // 用于自动登录存储在cookie中的值
             map1.put("jiaoliToken", jiaoliToken);
-            // 登录成功后将用户的id和昵称存到redis中，便于生成jwttoken时使用(过期时间为2天)
-            redisTemplate.opsForHash().put("user:"+user.getId(),"id",user.getId());
-            redisTemplate.opsForHash().put("user:"+user.getId(),"nickname",user.getNickname());
-            redisTemplate.expire("user:" + user.getId(), 2, TimeUnit.DAYS);
-
             return new Result(true, StatusCode.OK, "登录成功",map1);
         }else {
             return new Result(false, StatusCode.ERROR,"用户名或密码错误");
@@ -86,12 +83,9 @@ public class LoginController {
                     map1.put("userId", user.getId()+"");
                     map1.put("nickname", user.getNickname());
                     map1.put("avatar", user.getAvatar());
-                    // 用于自动登录存储在token中的值
+                    // 用于自动登录存储在cookie(jiaolitoken)中的值
                     map1.put("jiaoliToken", jiaoliToken);
-                    // 自动登录成功后将用户的id和昵称存到redis中，便于生成jwttoken时使用(过期时间为2天)
-                    redisTemplate.opsForHash().put("user:"+user.getId(),"id",user.getId().toString());
-                    redisTemplate.opsForHash().put("user:"+user.getId(),"nickname",user.getNickname());
-                    redisTemplate.expire("user:" + user.getId(), 2, TimeUnit.DAYS);
+
                     return new Result(true, StatusCode.OK, "自动登录成功",map1);
                 }
             }
@@ -102,8 +96,8 @@ public class LoginController {
 
     /**
      * 当token过期了刷新token
-     * @param userId
-     * @param nickname
+     * @param userId 用户ID
+     * @param nickname 用户昵称
      * @return
      */
     @GetMapping("/reflashToken")

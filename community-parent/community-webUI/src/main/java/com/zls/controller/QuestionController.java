@@ -27,6 +27,21 @@ public class QuestionController {
     private QuestionService questionService;
     @Autowired
     private QuestionCommentService questionCommentService;
+
+    /**
+     * 添加问题或贴子
+     * @param question  问题（帖子实体）
+     * @return
+     */
+    @PostMapping("/add/{type}")
+    public Result addQuestion(@RequestBody Question question){
+        boolean b = questionService.addQuestion(question);
+        if (b) {
+            return new Result();
+        }
+        return new Result(false, StatusCode.ERROR, "添加问题失败！");
+    }
+
     /**
      * 分页查询问题或者帖子
      * @param type
@@ -61,5 +76,20 @@ public class QuestionController {
         map.put("question", question);
         map.put("commentCount", commentCount);
         return new Result(true, StatusCode.OK, "查询成功",map);
+    }
+
+    /**
+     * 用户给问题点赞功能
+     * @param questionId  questionID
+     * @param liketor 点赞者
+     * @return
+     */
+    @GetMapping("/like")
+    public Result likeQuestion(@RequestParam("questionId") Integer questionId,@RequestParam("liketor") Integer liketor){
+        boolean b = questionService.likeQuestion(questionId, liketor);
+        if (b) {
+            return new Result(true, StatusCode.OK, "点赞成功！");
+        }
+        return new Result(false, StatusCode.ERROR, "你已经点过赞了！");
     }
 }

@@ -17,7 +17,7 @@ import java.util.Map;
     @Insert("INSERT into tb_question (title, content, gmt_create, gmt_modified, creator, type) " +
             " value (#{title},#{content} ,#{gmtCreate} ,#{gmtModified} ," +
             "#{creator} ,#{type} )")
-    void insertQuestion(Question question);
+    boolean addQuestion(Question question);
 
     /**
      * 分页查询所有问题或帖子,按时间倒序排序
@@ -132,9 +132,18 @@ import java.util.Map;
     Integer getViewCount(@Param("id") Integer id);
 
     /**
-     * 同步点赞数到数据库中
+     * 同步阅读数到数据库中
      * @param map
      */
     Boolean syncViewCountToDatabase(@Param("map") Map<Integer,Integer> map);
+
+
+    /**
+     * 评论数+1操作
+     * @param questionId 问题ID
+     * @return
+     */
+    @Update("update tb_question set comment_count = comment_count+1 where id=#{questionId} ")
+    Boolean incrementCommentCount(@Param("questionId") Integer questionId);
 
 }

@@ -18,6 +18,11 @@ public class NoticeController {
     @Autowired
     NoticeService noticeService;
 
+    /**
+     * 分页查询所有公告，按时间降序
+     * @param page
+     * @return
+     */
     @GetMapping("/find")
     public Result findAllNotice(@RequestParam("page") int page){
         Page<Notice> allNotice = noticeService.findAllNotice(page);
