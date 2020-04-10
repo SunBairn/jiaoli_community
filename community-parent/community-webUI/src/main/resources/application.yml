@@ -17,4 +17,6 @@ mybatis:
   mapper-locations: classpath:mapper/*.xml
 server:
   port: 1314
+user:
+  avatar: http://192.168.155.129:8080/group1/M00/00/00/wKibgV56PhSAaPZRAACCvTzUw9Q561.png
 

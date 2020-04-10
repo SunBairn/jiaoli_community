@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zls.mapper.UserMapper">
+
+
+    <update id="updateUser" parameterType="com.zls.pojo.User">
+        update tb_user
+        <set>
+                nickname=#{user.nickname,jdbcType=VARCHAR},
+                name = #{user.name,jdbcType=VARCHAR},
+                mobile = #{user.mobile},
+                email = #{user.email},
+                sex = #{user.sex},
+                birthday = #{user.birthday,jdbcType=DATE},
+                interest = #{user.interest}
+        </set>
+        where id=#{user.id}
+    </update>
+</mapper>

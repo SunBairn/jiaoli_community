@@ -13,6 +13,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
+
 @Service
 @Transactional
 public class QuestionCommentServiceImpl implements QuestionCommentService {
@@ -37,6 +39,7 @@ public class QuestionCommentServiceImpl implements QuestionCommentService {
     public List<QuestionComment> pageFindCommentWithUserByParentId(Integer parentId,Integer type,Integer page) {
         Integer start = page*10;
         List<QuestionComment> questionComments = questionCommentMapper.pageFindCommentWithUserByParentId(parentId,type,start);
+        // 从缓存中读取点赞数
         for (QuestionComment questionComment : questionComments){
             Integer id = questionComment.getId();
             Boolean aBoolean = stringRedisTemplate.hasKey("question:comment:like_count:" + id);
@@ -58,17 +61,6 @@ public class QuestionCommentServiceImpl implements QuestionCommentService {
         return reply;
     }
 
-    /**
-     * 统计某个问题或帖子的总评论数
-     * @param parentId  父类ID
-     * @return
-     */
-    @Override
-    public Long getCountByParentId(Integer parentId) {
-        Long count = questionCommentMapper.getCountByParentId(parentId);
-        return count;
-    }
-
 
 
     /**
@@ -84,6 +76,7 @@ public class QuestionCommentServiceImpl implements QuestionCommentService {
             return false;
         }
         Boolean aBoolean = stringRedisTemplate.opsForValue().setBit("question:comment:like_count:" + commentId, liketor, true);
+        stringRedisTemplate.expire("question:comment:like_count:" + commentId, 10, TimeUnit.DAYS);
         if (aBoolean){
             throw new CustomizeException(CustomizeErrorCode.LIKE_FAILED);
         }
@@ -108,7 +101,7 @@ public class QuestionCommentServiceImpl implements QuestionCommentService {
                 throw new CustomizeException(CustomizeErrorCode.INCREMENT_COMMENT_COUNT_FAILED);
             }
         }else  if (questionComment.getType()==2) {
-            // 如果为回复，则评论和对应的问题的回复数 +1
+            // 如果为回复，则评论和对应的问题的回复数都 +1
             boolean b1 = questionService.incrementCommentCount(questionComment.getQuestionId());
             if (!b1) {
                 // 这里如果添加失败则会进行事务回滚

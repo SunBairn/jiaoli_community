@@ -26,5 +26,18 @@ public class MD5Test {
         System.out.println(b);
     }
 
+    @Test
+    public void test3(){
+        String url = "http://192.168.129.155:9999/group1/M00/00/00/1.png";
+        int i1 = url.indexOf("/",7);
+        String substring1 = url.substring(i1+1);
+        System.out.println(substring1);
+        int i = substring1.indexOf("/");
+        String substring = substring1.substring(0, i);
+        System.out.println(substring);
+        String substring2 = substring1.substring(substring.length() + 1);
+        System.out.println(substring2);
+    }
+
 
 }

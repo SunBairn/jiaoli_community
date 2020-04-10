@@ -19,6 +19,17 @@ import java.util.Map;
             "#{creator} ,#{type} )")
     boolean addQuestion(Question question);
 
+
+    /**
+     * 修改文章或帖子
+     * @param question 问题实体
+     * @return
+     */
+    @Update("update tb_question set title=#{question.title} ,content=#{question.content} ," +
+            "gmt_modified = #{question.gmtModified} " +
+            "where id=#{question.id}")
+    boolean updateQuestion(@Param("question") Question question);
+
     /**
      * 分页查询所有问题或帖子,按时间倒序排序
      * @param type
@@ -95,16 +106,16 @@ import java.util.Map;
 
 
     /**
-     * 根据用户的ID查询所有的问题或帖子
+     * 根据用户的ID和问题的type查询所有的问题或帖子
      * @param creator
      * @return
      */
-    @Select("select * from tb_question where creator=#{creator} ")
-    List<Question> findAllQuestionByCreator(@Param("creator") Integer creator);
+    @Select("select id,title,creator,gmt_create,view_count,like_count,comment_count from tb_question where creator=#{creator} and type=#{type}")
+    List<Question> findQuestionByCreatorAndType(@Param("creator") Integer creator,@Param("type") Integer type);
 
 
     /**
-     * 根据问题ID查询某个问题的具体信息和评论信息（只查一级评论）（包含用户的部分信息）
+     * 根据问题ID查询某个问题的具体信息（包含用户的部分信息）
      * @param id
      * @return
      */
@@ -146,4 +157,11 @@ import java.util.Map;
     @Update("update tb_question set comment_count = comment_count+1 where id=#{questionId} ")
     Boolean incrementCommentCount(@Param("questionId") Integer questionId);
 
+    /**
+     * 根据ID删除问题或帖子
+     * @param id questionId
+     * @return
+     */
+    @Delete("delete from tb_question where id=#{Id}")
+    boolean deleteQuestion(@Param("Id") Integer id);
 }

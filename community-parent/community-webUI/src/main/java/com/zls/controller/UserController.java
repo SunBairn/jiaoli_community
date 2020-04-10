@@ -6,6 +6,7 @@ import entity.Result;
 import entity.StatusCode;
 import io.jsonwebtoken.Claims;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 @RestController
 @RequestMapping("/user")
 public class UserController {
+
 
     @Autowired
     UserService userService;
@@ -61,6 +63,20 @@ public class UserController {
         return new Result(false, StatusCode.ERROR, "该号码已被注册");
     }
 
+    /**
+     * 根据用户ID查询用户信息
+     * @param id  userID
+     * @return
+     */
+    @GetMapping("/find/{id}")
+    public Result findUserById(@PathVariable("id") Integer id){
+        User user = userService.findById(id);
+        if (user!=null){
+            return new Result(true, StatusCode.OK, "查询成功！", user);
+        }
+        return new Result(false, StatusCode.ERROR, "查询失败！");
+    }
+
 
     /**
      * 根据ID删除用户
@@ -79,6 +95,34 @@ public class UserController {
         return new Result(true, StatusCode.OK, "删除用户成功！");
     }
 
+    /**
+     * 修改用户信息
+     * @param user 用户实体
+     * @return
+     */
+    @PutMapping("/update")
+    public Result updateUser(@RequestBody User user) {
+        boolean b = userService.updateUser(user);
+        if (b) {
+            return new Result();
+        }
+        return new Result(false, StatusCode.ERROR, "修改失败！");
+    }
 
+
+    /**
+     * 修改用户头像
+     * @param user 用户实体
+     * @param
+     * @return
+     */
+    @PutMapping("/update/avatar")
+    public Result updataUserAvatar(@RequestBody User user){
+        boolean b = userService.updateUserAvatar(user.getId(),user.getAvatar());
+        if (b) {
+            return new Result();
+        }
+        return new Result(false, StatusCode.ERROR, "修改头像失败！");
+    }
 
 }

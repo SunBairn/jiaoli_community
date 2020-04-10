@@ -6,6 +6,7 @@ import entity.StatusCode;
  * 枚举类,定义一些异常所用到的常量
  */
 public enum CustomizeErrorCode implements ICustomizeErrorCode {
+    PERMISSION_DENIED(false, StatusCode.ACCESSERROR, "权限不足！"),
     JWTTOKEN_EXPRIED(false, StatusCode.JWTTOKEN_EXPIRED,"token已过期或者token错误！"),
     DECODER_ERROR(false, StatusCode.ERROR,"交理token解密失败"),
     QUESTION_NOT_FOUND(false,StatusCode.ERROR, "问题不存在或已删除！！！"),
@@ -15,6 +16,8 @@ public enum CustomizeErrorCode implements ICustomizeErrorCode {
     INSERT_COMMENT_FAILED(false,StatusCode.ERROR,"评论失败！"),
     INCREMENT_COMMENT_COUNT_FAILED(false,StatusCode.ERROR,"添加评论数失败！"),
     INCREMENT_REPLY_COUNT_FAILED(false,StatusCode.ERROR,"添加回复数失败！"),
+    FILE_UPLOAD_FAILED(false,StatusCode.ERROR,"文件上传失败！"),
+    FILE_DELETE_FAILED(false,StatusCode.ERROR,"文件删除失败！")
     ;
 
     private boolean flag;

@@ -14,7 +14,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.TimeUnit;
 
 @CrossOrigin(origins = "http://localhost:8080",allowCredentials = "true")
 @RestController
@@ -90,8 +89,29 @@ public class LoginController {
                 }
             }
         }
-
          return new Result(false, StatusCode.ERROR,"自动登录失败！");
+    }
+
+    /**
+     * 退出登录
+     * @param userId
+     * @return
+     */
+    @GetMapping("/loginOut")
+    public Result loginOut(@RequestParam("userId") Integer userId,@RequestParam("jiaoliToken") String jiaoliToken,
+                           HttpServletRequest request,HttpServletResponse response){
+        // 1、清除缓存中的用户信息
+        userService.loginOut(userId, jiaoliToken);
+        // 2、清除cookie中的信息
+        Cookie[] cookies = request.getCookies();
+        for (Cookie cookie : cookies) {
+            if ("jiaoli_token".equals(cookie.getName()) || "jwttoken".equals(cookie.getName())) {
+                cookie.setMaxAge(0);
+                response.addCookie(cookie);
+            }
+        }
+        // 3、删除sessionStorage中的信息,在前台删除
+        return new Result();
     }
 
     /**

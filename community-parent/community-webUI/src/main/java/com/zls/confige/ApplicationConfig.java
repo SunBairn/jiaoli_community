@@ -22,6 +22,7 @@ public class ApplicationConfig extends WebMvcConfigurationSupport {
         List<String> list = new ArrayList<>();
         list.add("/**/login");
         list.add("/**/autoLogin");
+        list.add("/**/loginOut");
         list.add("/**/find/**");
         list.add("/**/user/check");
         registry.addInterceptor(jwtFilter)

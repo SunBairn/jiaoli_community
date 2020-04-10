@@ -25,12 +25,6 @@ public interface QuestionCommentService {
      */
     List<QuestionComment> findAllReplyByParentId(Integer parentId);
 
-    /**
-     *统计某个问题或帖子的总评论数
-     * @param parentId  父类ID
-     * @return
-     */
-    Long getCountByParentId(Integer parentId);
 
 
     /**

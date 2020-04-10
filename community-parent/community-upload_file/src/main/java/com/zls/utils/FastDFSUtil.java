@@ -174,6 +174,7 @@ public class FastDFSUtil {
 //        } catch (Exception e) {
 //            e.printStackTrace();
 //        }
-        System.out.println(getTrackerUrl());
+        String trackerUrl = FastDFSUtil.getTrackerUrl();
+        System.out.println(trackerUrl);
     }
 }

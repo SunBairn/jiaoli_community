@@ -46,6 +46,13 @@ public interface UserService {
      */
     Map<String,Object> autoLogin(String jiaoliToken);
 
+    /**
+     * 退出登录
+     * @param userId  用户ID
+     * @return
+     */
+    boolean loginOut(Integer userId,String jiaoliToken);
+
 
     /**
      * 根据用户ID去查询用户信息
@@ -60,4 +67,18 @@ public interface UserService {
      */
     void deleteUser(Integer id);
 
+    /**
+     * 修改用户信息
+     * @param user 用户实体
+     * @return
+     */
+    boolean updateUser(User user);
+
+    /**
+     * 修改用户头像
+     * @param id userId
+     * @param avatar 用户头像
+     * @return
+     */
+    boolean updateUserAvatar(Integer id,String avatar);
 }

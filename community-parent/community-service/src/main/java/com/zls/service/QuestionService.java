@@ -3,6 +3,7 @@ package com.zls.service;
 import com.zls.pojo.Question;
 import entity.Page;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -16,7 +17,14 @@ public interface QuestionService {
      * @param question 问题实体
      * @return
      */
-    boolean addQuestion(Question question);
+    boolean addQuestion(Question question,Integer type);
+
+    /**
+     * 修改问题或帖子
+     * @param question 问题实体
+     * @return
+     */
+    boolean updateQuestion(Question question);
 
     /**
      * 分页查询所有问题或者帖子
@@ -54,7 +62,19 @@ public interface QuestionService {
      */
     boolean incrementCommentCount(Integer questionId);
 
+    /**
+     * 根据Creator和type查询问题或帖子
+     * @param creator 作者ID
+     * @param type 类型
+     * @return
+     */
+    List<Question> findQuestionByCreatorAndType(Integer creator,Integer type);
 
-
+    /**
+     * 根据ID删除问题或帖子
+     * @param id questionId
+     * @return
+     */
+    boolean deleteQuestion(Integer id,Integer userId,Integer creator, HttpServletRequest request);
 
 }

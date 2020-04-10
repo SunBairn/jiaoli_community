@@ -1,7 +1,12 @@
 package com.zls.service;
 
 import com.zls.pojo.Article;
+import com.zls.pojo.Column;
+import com.zls.pojo.Tag;
 import entity.Page;
+import org.apache.ibatis.annotations.Select;
+
+import java.util.List;
 
 public interface ArticleService {
 
@@ -35,4 +40,31 @@ public interface ArticleService {
      * @return
      */
     boolean addArticle(Article article);
+
+    /**
+     * 修改文章
+     * @param article 文章实体
+     * @return Boolean
+     */
+    boolean updateArticle(Article article);
+
+    /**
+     * 根据ID查询专栏的信息展示在具体页面
+     */
+    Article findArticleWithUserById(Integer id);
+
+
+    /**
+     * 查询state为 1 的标签
+     * @return
+     */
+    List<Tag> findTagByState();
+
+    /**
+     * 查询state为 1 的专栏
+     * @return
+     */
+    List<Column> findColumnBystate();
+
+
 }

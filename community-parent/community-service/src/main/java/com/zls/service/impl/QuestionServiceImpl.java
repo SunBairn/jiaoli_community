@@ -7,6 +7,7 @@ import com.zls.utils.RedisServiceExtend;
 import entity.Page;
 import enums.CustomizeErrorCode;
 import enums.CustomizeException;
+import io.jsonwebtoken.Claims;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Repository;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -35,8 +37,26 @@ import java.util.concurrent.TimeUnit;
      * @return
      */
     @Override
-    public boolean addQuestion(Question question) {
+    public boolean addQuestion(Question question , Integer type) {
+        question.setType(type);
+        question.setGmtCreate(System.currentTimeMillis());
+        question.setGmtModified(System.currentTimeMillis());
         boolean b = questionMapper.addQuestion(question);
+        if (b) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * 修改问题或实体
+     * @param question 问题实体
+     * @return
+     */
+    @Override
+    public boolean updateQuestion(Question question) {
+        question.setGmtModified(System.currentTimeMillis());
+        boolean b = questionMapper.updateQuestion(question);
         if (b) {
             return true;
         }
@@ -162,6 +182,7 @@ import java.util.concurrent.TimeUnit;
           return false;
         }
         Boolean aBoolean = stringRedisTemplate.opsForValue().setBit("question:like_count:" + questionId, liketor, true);
+        stringRedisTemplate.expire("question:like_count:" + questionId, 30, TimeUnit.DAYS);
         if (aBoolean){
             throw new CustomizeException(CustomizeErrorCode.LIKE_FAILED);
         }
@@ -180,6 +201,48 @@ import java.util.concurrent.TimeUnit;
             return true;
         }
         return false;
+    }
+
+    /**
+     * 根据creator和type查询问题或帖子
+     * @param creator 作者ID
+     * @param type 类型
+     * @return
+     */
+    @Override
+    public List<Question> findQuestionByCreatorAndType(Integer creator, Integer type) {
+        List<Question> questions = questionMapper.findQuestionByCreatorAndType(creator, type);
+        return questions;
+    }
+
+    /**
+     * 根据ID删问题或帖子
+     * @param id questionId
+     * @param userId 用户ID
+     * @param creator 问题作者
+     * @param request
+     * @return
+     */
+    @Override
+    public boolean deleteQuestion(Integer id,Integer userId,Integer creator, HttpServletRequest request) {
+        if (request.getAttribute("admin_roles")!=null){
+            boolean b = questionMapper.deleteQuestion(id);
+            return true;
+        }
+        if (request.getAttribute("user_roles")!=null){
+            // 获取claims中的ID和userId 匹配
+            Claims user_roles = (Claims) request.getAttribute("user_roles");
+            String id1 = user_roles.getId();
+            if (id1.equals(userId.toString())) {
+                boolean b = questionMapper.deleteQuestion(id);
+                return true;
+            }else{
+                // 权限不足
+                throw new CustomizeException(CustomizeErrorCode.PERMISSION_DENIED);
+            }
+        }
+        // 权限不足
+        throw new CustomizeException(CustomizeErrorCode.PERMISSION_DENIED);
     }
 
 

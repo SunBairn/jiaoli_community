@@ -7,6 +7,7 @@ import enums.CustomizeErrorCode;
 import enums.CustomizeException;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
@@ -16,15 +17,15 @@ import utils.MD5Utils;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
-import java.util.UUID;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 @Service
 @Transactional
 public class UserServiceImpl implements UserService {
+
+    @Value("${user.avatar}")
+    String avatar;
 
     @Autowired
     RedisTemplate redisTemplate;
@@ -100,6 +101,7 @@ public class UserServiceImpl implements UserService {
             user.setNickname("jiaoli_"+user.getMobile());
             user.setGmtRegdate(System.currentTimeMillis());
             user.setGmtModified(System.currentTimeMillis());
+            user.setAvatar(avatar);
             userMapper.addUser(user);
         }else{
             throw new RuntimeException("该号码已被注册");
@@ -213,6 +215,21 @@ public class UserServiceImpl implements UserService {
         return null;
     }
 
+    /**
+     * 退出登录
+     * @param userId  用户ID
+     * @param jiaoliToken 自动登录token
+     * @return
+     */
+    @Override
+    public boolean loginOut(Integer userId,String jiaoliToken) {
+        // 1、清除缓存中的用户信息
+        stringRedisTemplate.expire("jiaoliToken_" + jiaoliToken, -1, TimeUnit.SECONDS);
+        stringRedisTemplate.expire(jiaoliToken, -1, TimeUnit.SECONDS);
+        redisTemplate.expire("user_" + userId,-1,TimeUnit.SECONDS);
+        return false;
+    }
+
 
     /**
      * 根据用户ID去查询某个用户的信息
@@ -230,6 +247,31 @@ public class UserServiceImpl implements UserService {
      */
     public void deleteUser(Integer id){
         userMapper.deleteUser(id);
+    }
+
+    /**
+     * 修改用户信息
+     * @param user 用户实体
+     * @return
+     */
+    @Override
+    public boolean updateUser(User user) {
+        Date birthday = user.getBirthday();
+        boolean b = userMapper.updateUser(user);
+        return b;
+    }
+
+
+    /**
+     * 修改用户头像
+     * @param id userId
+     * @param avatar 用户头像
+     * @return
+     */
+    @Override
+    public boolean updateUserAvatar(Integer id, String avatar) {
+        boolean b = userMapper.updateUserAvatar(id, avatar);
+        return b;
     }
 
 

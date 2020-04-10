@@ -66,4 +66,20 @@ import org.springframework.stereotype.Repository;
      */
     @Delete("delete from tb_user where id=#{id}")
     void deleteUser(@Param("id") Integer id);
+
+    /**
+     * 修改用户信息
+     * @param user
+     * @return
+     */
+    boolean updateUser(@Param("user") User user);
+
+    /**
+     * 修改头像
+     * @param id userId
+     * @param avatar 头像地址
+     * @return
+     */
+    @Update("update tb_user set avatar=#{avatar} where id=#{id}")
+    boolean updateUserAvatar(@Param("id") Integer id,@Param("avatar") String avatar);
 }

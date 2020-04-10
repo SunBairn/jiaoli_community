@@ -23,4 +23,5 @@ public class ArticleComment implements Serializable {
     private Integer likeCount;
     // 评论的回复数
     private Integer replyCount;
+    private User user;
 }

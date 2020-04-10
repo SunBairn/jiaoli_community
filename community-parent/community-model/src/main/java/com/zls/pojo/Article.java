@@ -13,6 +13,7 @@ public class Article implements Serializable {
 
     private Integer id;
     private Integer userId;
+    private Integer columnId; // 专栏ID
     private String title;
     private String content;
     private Long gmtCreate;
@@ -26,6 +27,9 @@ public class Article implements Serializable {
     private String imageUrl;
     // 文章标签
     private String tag;
+
+    // 文章专栏
+    private Column column;
 
     private User user;
 

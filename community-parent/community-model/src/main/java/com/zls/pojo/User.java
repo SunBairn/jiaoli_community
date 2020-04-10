@@ -2,7 +2,7 @@ package com.zls.pojo;
 import lombok.Data;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -14,10 +14,11 @@ public class User implements Serializable {
     private String mobile;
     private String password;
     private String nickname;
+    private String name;
     private String sex;
     private Date birthday;
     private String avatar;
-    private String emai;
+    private String email;
     private Long gmtRegdate;
     private Long gmtModified;
     private String interest;

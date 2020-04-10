@@ -36,13 +36,6 @@ import java.util.List;
     List<QuestionComment> pageFindCommentWithUserByParentId(@Param("parentId") Integer parentId,@Param("type") Integer type,@Param("start") Integer start);
 
 
-    /**
-     * 统计某个问题或帖子的总评论数
-     * @param parentId 父类ID
-     */
-    @Select("select count(1) from tb_question_comment where parent_id = #{parentId}  ")
-    Long getCountByParentId(@Param("parentId") Integer parentId);
-
 
     /**
      * 添加评论
@@ -57,7 +50,7 @@ import java.util.List;
 
 
     /**
-     * 给评论点赞
+     * 给评论回复数 +1
      * @param commentId 评论ID
      * @return
      */

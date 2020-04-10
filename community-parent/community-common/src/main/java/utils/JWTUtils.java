@@ -54,7 +54,7 @@ public class JWTUtils {
         return builder.compact();
     }
     /**
-     * 生成加密后的秘钥 secretKey
+     * 将秘钥进行加密 secretKey
      * @return
      */
     public static SecretKey generalKey(){
