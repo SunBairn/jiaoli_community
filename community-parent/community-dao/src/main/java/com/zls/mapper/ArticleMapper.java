@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 
 @Mapper
 @Repository public interface ArticleMapper {
@@ -78,6 +79,14 @@ import java.util.List;
     })
     List<Article> findAllArticleWithUserByHot(@Param("start") Long start,@Param("size") int size);
 
+    /**
+     * 根据用户ID查询文章(不包含文章内容)
+     * @param userId 用户ID
+     * @return
+     */
+    @Select("select id,user_id,title,content,gmt_create,view_count,like_count,comment_count from tb_article where user_id=#{userId} order by gmt_create desc ")
+    List<Article> findArticleByUserId(@Param("userId") Integer userId);
+
 
     /**
      * 根据ID查询文章以及部分用户信息和所属专栏的名称
@@ -127,4 +136,36 @@ import java.util.List;
      */
     @Select("select view_count from tb_article where id = #{id}")
     Integer getViewCount(@Param("id") Integer id);
+
+    /**
+     * 根据ID删除文章
+     * @param id 文章ID
+     * @return
+     */
+    @Delete("delete from tb_article where id=#{id}")
+    boolean deleteArticle(@Param("id") Integer id);
+
+    /**
+     * 根据用户ID分组（根据专栏ID分组）查询文章数
+     * @param userId
+     */
+    @Select("select column_id,count(column_id) as nums from tb_article where user_id=#{userId} group by column_id")
+    List<Map<Integer,Integer>> findArticleByUserIdGroupByColumnId(@Param("userId") Integer userId);
+
+    /**
+     * 根据用户ID和专栏ID查询文章
+     * @param userId
+     * @param columnId 专栏ID
+     * @return
+     */
+    @Select("select * from tb_article where user_id=#{userId} and column_id=#{columnId} ")
+    List<Article> findArticleByUserIdAndColumnId(@Param("userId") Integer userId,@Param("columnId") Integer columnId);
+
+
+    /**
+     * 查询排行前7的热门文章
+     * @return
+     */
+    @Select("select id,title,view_count from tb_article order by view_count desc limit 0,7")
+    List<Article> findHotArticle();
 }

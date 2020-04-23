@@ -16,4 +16,8 @@
         </set>
         where id=#{user.id}
     </update>
+    <select id="findCollectionArticleByUserId" resultType="com.zls.pojo.Article">
+        select * from tb_article where id in
+        (select article_id from tb_collection where tb_collection.user_id=#{userId})
+    </select>
 </mapper>

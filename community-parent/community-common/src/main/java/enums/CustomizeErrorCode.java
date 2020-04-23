@@ -6,6 +6,8 @@ import entity.StatusCode;
  * 枚举类,定义一些异常所用到的常量
  */
 public enum CustomizeErrorCode implements ICustomizeErrorCode {
+    TRANSACTION_ROLLBACK(false, StatusCode.ERROR, "事务回滚！"),
+    REPETITION_OPERATION(false,StatusCode.REPERROR,"重复操作！"),
     PERMISSION_DENIED(false, StatusCode.ACCESSERROR, "权限不足！"),
     JWTTOKEN_EXPRIED(false, StatusCode.JWTTOKEN_EXPIRED,"token已过期或者token错误！"),
     DECODER_ERROR(false, StatusCode.ERROR,"交理token解密失败"),

@@ -9,10 +9,12 @@ import entity.Page;
 import entity.PageResult;
 import entity.Result;
 import entity.StatusCode;
+import org.apache.ibatis.annotations.Delete;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import utils.PageUtils;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:8080",allowCredentials = "true")
@@ -125,6 +127,58 @@ public class ArticleController {
             return new Result(true, StatusCode.OK, "查询成功！", columns);
         }
         return new Result(true, StatusCode.OK, "查询专栏失败！");
+    }
+
+
+    /**
+     * 根据UserID查询文章
+     * @param userId 用户ID
+     * @return
+     */
+    @GetMapping("/find/all/{userId}")
+    public Result findArticonByUserId(@PathVariable("userId") Integer userId) {
+        List<Article> articleByUserId = articleService.findArticleByUserId(userId);
+        return new Result(true, StatusCode.OK, "查询文章成功", articleByUserId);
+    }
+
+
+    /**
+     * 根据ID删除文章
+     * @param id 文章ID
+     * @param userId 文章作者ID
+     * @param request
+     * @return
+     */
+    @DeleteMapping("/delete")
+    public Result deleteArticle(@RequestParam("id") Integer id, @RequestParam("userId") Integer userId, HttpServletRequest request){
+        boolean b = articleService.deleteArticle(id, userId, request);
+        if (b) {
+            return new Result();
+        }
+        return new Result(false,StatusCode.ERROR,"删除失败");
+    }
+
+    /**
+     * 根据用户ID和专栏ID查询文章
+     * @param userId
+     * @param columnId
+     * @return
+     */
+    @GetMapping("/find/userId/columnId")
+    public Result findArticleByUserIdAndColumnId(@RequestParam("userId") Integer userId,
+                                                        @RequestParam("columnId") Integer columnId) {
+        List<Article> articles = articleService.findArticleByUserIdAndColumnId(userId, columnId);
+        return new Result(true,StatusCode.OK,"执行成功！",articles);
+    }
+
+    /**
+     * 查询热门文章
+     * @return
+     */
+    @GetMapping("/find/hot")
+    public Result findHotArticle(){
+        List<Article> hotArticle = articleService.findHotArticle();
+        return new Result(true, StatusCode.OK, "查询成功！", hotArticle);
     }
 
 }

@@ -1,8 +1,10 @@
 package com.zls.service.impl;
 
 import com.zls.mapper.UserMapper;
+import com.zls.pojo.Article;
 import com.zls.pojo.User;
 import com.zls.service.UserService;
+import com.zls.vo.PageHome;
 import enums.CustomizeErrorCode;
 import enums.CustomizeException;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -272,6 +274,84 @@ public class UserServiceImpl implements UserService {
     public boolean updateUserAvatar(Integer id, String avatar) {
         boolean b = userMapper.updateUserAvatar(id, avatar);
         return b;
+    }
+
+    /**
+     * 根据用户ID获取用户的信息和用户主页需要显示的信息
+     * @param id userId
+     */
+    @Override
+    public PageHome findUserAndOtherById(Integer id) {
+        PageHome pageHome = userMapper.findUserAndOtherById(id);
+        return pageHome;
+    }
+
+    /**
+     * 根据用户ID查询收藏的文章
+     * @param userId
+     * @return
+     */
+    @Override
+    public List<Article> findCollectionArticleByUserId(Integer userId) {
+        List<Article> collectionArticleByUserId = userMapper.findCollectionArticleByUserId(userId);
+        return collectionArticleByUserId;
+    }
+
+    /**
+     * 根据ID查询用户关注列表
+     * @param id 用户ID
+     * @return
+     */
+    @Override
+    public List<User> findFollowListById(Integer id) {
+        List<User> followList = userMapper.findFollowListById(id);
+        return followList;
+    }
+
+    /**
+     * 根据ID查询用户粉丝列表
+     * @param id 用户ID
+     * @return
+     */
+    @Override
+    public List<User> findFansListById(Integer id) {
+        List<User> fansList = userMapper.findFansListById(id);
+        return fansList;
+    }
+
+    /**
+     * 查询粉丝数排名前十的用户信息
+     * @return
+     */
+    @Override
+    public List<User> findHotUser() {
+        // 先从缓存中查，看缓存中有没有
+        Set<String> keys = stringRedisTemplate.keys("hot:user:*");
+        if (keys.size()!=0&&keys.size()==16){
+            List<User> users = new ArrayList<>();
+            for (String key : keys) {
+                String id = (String) stringRedisTemplate.opsForHash().get(key, "id");
+                String nickname = (String) stringRedisTemplate.opsForHash().get(key, "nickname");
+                String avatar = (String) stringRedisTemplate.opsForHash().get(key, "avatar");
+                User user=new User();
+                user.setId(Integer.valueOf(id));
+                user.setNickname(nickname);
+                user.setAvatar(avatar);
+                users.add(user);
+            }
+            return users;
+        }
+        // 否者从数据库中查询，在存入缓存中，过期时间为1天
+        List<User> hotUser = userMapper.findHotUser();
+        Map<String, String> map = new HashMap<>();
+        for (User user : hotUser) {
+            map.put("id", user.getId().toString());
+            map.put("nickname", user.getNickname());
+            map.put("avatar", user.getAvatar());
+            stringRedisTemplate.opsForHash().putAll("hot:user:"+user.getId(),map);
+            stringRedisTemplate.expire("hot:user", 1, TimeUnit.DAYS);
+        }
+        return hotUser;
     }
 
 

@@ -1,7 +1,9 @@
 package com.zls.controller;
 
+import com.zls.pojo.Article;
 import com.zls.pojo.User;
 import com.zls.service.UserService;
+import com.zls.vo.PageHome;
 import entity.Result;
 import entity.StatusCode;
 import io.jsonwebtoken.Claims;
@@ -10,6 +12,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
+
 @CrossOrigin(origins = "http://localhost:8080",allowCredentials = "true")
 @RestController
 @RequestMapping("/user")
@@ -125,4 +129,58 @@ public class UserController {
         return new Result(false, StatusCode.ERROR, "修改头像失败！");
     }
 
+    /**
+     * 查询用户主页中需要显示的信息
+     * @param userId 用户ID
+     */
+    @GetMapping("/pageHome")
+    public Result findUserPageHome(@RequestParam("userId") Integer userId){
+        PageHome userAndOtherById = userService.findUserAndOtherById(userId);
+        if (userAndOtherById != null) {
+            return new Result(true, StatusCode.OK, "查询成功！", userAndOtherById);
+        }
+        return new Result(false, StatusCode.ERROR, "查询失败！");
+    }
+
+    /**
+     * 根据用户ID查询收藏的文章
+     * @param userId
+     * @return
+     */
+    @GetMapping("/collection")
+    public Result findCollectionArticleByUserId(@RequestParam("userId") Integer userId){
+        List<Article> collectionArticleByUserId = userService.findCollectionArticleByUserId(userId);
+        return new Result(true, StatusCode.OK, "执行成功！", collectionArticleByUserId);
+    }
+
+    /**
+     * 根据用户ID查询关注列表
+     * @param userId
+     * @return
+     */
+    @GetMapping("/follow/list")
+    public Result findFollowListById(@RequestParam("userId") Integer userId){
+        List<User> followList = userService.findFollowListById(userId);
+        return new Result(true, StatusCode.OK, "执行成功！", followList);
+    }
+
+    /**
+     * 根据用户ID查询粉丝列表
+     * @param userId
+     * @return
+     */
+    @GetMapping("/fans/list")
+    public Result findFansList(@RequestParam("userId") Integer userId){
+        List<User> fansList = userService.findFansListById(userId);
+        return new Result(true, StatusCode.OK, "执行成功！", fansList);
+    }
+
+    /**
+     * 查询粉丝数排名前十的用户
+     */
+    @GetMapping("/find/hot")
+    public Result findHotUser(){
+        List<User> hotUser = userService.findHotUser();
+        return new Result(true, StatusCode.OK, "查询成功", hotUser);
+    }
 }

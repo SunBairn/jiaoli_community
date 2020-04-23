@@ -27,4 +27,12 @@ import java.util.List;
      */
     @Select("select count(1) from tb_notice")
     Long noticeCount();
+
+    /**
+     * 根据ID查询公告信息
+     * @param id
+     * @return
+     */
+    @Select("select * from tb_notice where id=#{id} ")
+    Notice findNoticeById(@Param("id") Integer id);
 }

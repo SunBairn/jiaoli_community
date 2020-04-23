@@ -9,6 +9,7 @@ import com.zls.utils.RedisServiceExtend;
 import entity.Page;
 import enums.CustomizeErrorCode;
 import enums.CustomizeException;
+import io.jsonwebtoken.Claims;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
@@ -16,7 +17,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 import utils.PageUtils;
 
-import java.util.List;
+import javax.servlet.http.HttpServletRequest;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 @Service
@@ -122,7 +124,7 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     /**
-     * 根据ID查询专栏的信息展示在具体页面
+     * 根据ID查询文章的信息展示在具体页面
      * @param id
      * @return
      */
@@ -155,6 +157,44 @@ public class ArticleServiceImpl implements ArticleService {
         return article;
     }
 
+    /**
+     * 根据用户ID查询所有文章
+     * @param userId 用户ID
+     * @return
+     */
+    @Override
+    public List<Article> findArticleByUserId(Integer userId) {
+        List<Article> articles = articleMapper.findArticleByUserId(userId);
+        return articles;
+    }
+
+    /**
+     * 根据文章ID删除文章
+     * @param id 文章ID
+     * @param userId 用户ID，作者
+     * @param request
+     * @return
+     */
+    @Override
+    public boolean deleteArticle(Integer id, Integer userId, HttpServletRequest request) {
+        // 1、如果是管理员则直接删除
+        if (request.getAttribute("admin_roles") != null) {
+            boolean b = articleMapper.deleteArticle(id);
+            return b;
+        }
+        // 如果是用户，则判断用户的ID是否和article表的userID一致
+        if (request.getAttribute("user_roles") != null) {
+            Claims user_roles = (Claims) request.getAttribute("user_roles");
+            if (user_roles.getId().equals(userId.toString())){
+                boolean b = articleMapper.deleteArticle(id);
+                return b;
+            }else {
+                return false;
+            }
+        }
+        return false;
+    }
+
 
     /**
      * 查询state为 1 的标签
@@ -175,5 +215,53 @@ public class ArticleServiceImpl implements ArticleService {
     public List<Column> findColumnBystate() {
         List<Column> columns = articleMapper.findColumnByState();
         return columns;
+    }
+
+    /**
+     * 根据用户ID和专栏ID查询文章
+     * @param userId
+     * @param columnId
+     * @return
+     */
+    @Override
+    public List<Article> findArticleByUserIdAndColumnId(Integer userId, Integer columnId) {
+        List<Article> articles = articleMapper.findArticleByUserIdAndColumnId(userId, columnId);
+        return articles;
+    }
+
+    /**
+     * 查询热门文章，并且放入缓存中
+     * @return
+     */
+    @Override
+    public List<Article> findHotArticle() {
+        // 先从缓存中查，看缓存中有没有
+        Set<String> keys = stringRedisTemplate.keys("hot:article:*");
+        if (keys.size()!=0){
+            List<Article> articles = new ArrayList<>();
+            for (String key : keys) {
+                String id = (String) stringRedisTemplate.opsForHash().get(key, "id");
+                String title = (String) stringRedisTemplate.opsForHash().get(key, "title");
+                String view_count = (String) stringRedisTemplate.opsForHash().get(key, "view_count");
+                Article article = new Article();
+                article.setId(Integer.valueOf(id));
+                article.setTitle(title);
+                article.setViewCount(Integer.valueOf(view_count));
+                articles.add(article);
+            }
+            return articles;
+        }
+        // 否者从数据库中查询，在存入缓存中，过期时间为1天
+        List<Article> hotArticle = articleMapper.findHotArticle();
+        Map<String, String> map = new HashMap<>();
+        for (Article article : hotArticle) {
+            map.put("id", article.getId().toString());
+            map.put("title", article.getTitle());
+            map.put("view_count", article.getViewCount().toString());
+            stringRedisTemplate.opsForHash().putAll("hot:article:"+article.getId(),map);
+            stringRedisTemplate.expire("hot:article", 1, TimeUnit.DAYS);
+        }
+
+        return hotArticle;
     }
 }

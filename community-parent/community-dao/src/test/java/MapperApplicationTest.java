@@ -1,6 +1,7 @@
 import com.zls.MapperApplication;
 import com.zls.mapper.*;
 import com.zls.pojo.*;
+import com.zls.vo.PageHome;
 import entity.Page;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,6 +17,8 @@ import java.util.Map;
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = MapperApplication.class)
 public class MapperApplicationTest {
+    @Autowired
+    private AttentionMapper attentionMapper;
     @Autowired
     private QuestionMapper questionMapper;
     @Autowired
@@ -59,14 +62,9 @@ public class MapperApplicationTest {
         System.out.println(questions);
     }
 
-
     @Test
     public void aaa(){
-        Map<Integer, Integer> map = new HashMap<>();
-        map.put(29, 30);
-        map.put(30, 40);
-        questionMapper.syncViewCountToDatabase(map);
-        System.out.println("hahahah");
-
+        Attention attention = attentionMapper.selectAttention(5, 6);
+        System.out.println(attention);
     }
 }

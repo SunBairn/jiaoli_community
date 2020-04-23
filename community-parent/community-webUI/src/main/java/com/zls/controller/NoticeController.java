@@ -31,6 +31,16 @@ public class NoticeController {
         }
         PageResult pageResult = PageUtils.packagingPageResult(allNotice);
         return new Result(true, StatusCode.OK, "查询成功", pageResult);
+    }
 
+    /**
+     * 根据ID查询公告
+     * @param id
+     * @return
+     */
+    @GetMapping("/select/{id}")
+    public Result findNoticeById(@PathVariable("id") Integer id) {
+        Notice niticeById = noticeService.findNiticeById(id);
+        return new Result(true, StatusCode.OK, "查询成功", niticeById);
     }
 }

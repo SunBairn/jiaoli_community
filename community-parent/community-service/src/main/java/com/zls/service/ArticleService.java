@@ -6,6 +6,7 @@ import com.zls.pojo.Tag;
 import entity.Page;
 import org.apache.ibatis.annotations.Select;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 public interface ArticleService {
@@ -53,6 +54,22 @@ public interface ArticleService {
      */
     Article findArticleWithUserById(Integer id);
 
+    /**
+     * 根据用户ID查询文章
+     * @param userId 用户ID
+     * @return
+     */
+    List<Article> findArticleByUserId(Integer userId);
+
+    /**
+     * 根据ID删除文章（做权限校验）
+     * @param id 文章ID
+     * @param userId 用户ID，作者
+     * @param request
+     * @return
+     */
+    boolean deleteArticle(Integer id , Integer userId, HttpServletRequest request);
+
 
     /**
      * 查询state为 1 的标签
@@ -66,5 +83,17 @@ public interface ArticleService {
      */
     List<Column> findColumnBystate();
 
+    /**
+     * 根据用户ID和专栏ID查询文章
+     * @param userId
+     * @param columnId
+     * @return
+     */
+    List<Article> findArticleByUserIdAndColumnId(Integer userId,Integer columnId);
 
+    /**
+     * 查询排行前7的热门文章,并且放入缓存中
+     * @return
+     */
+    List<Article> findHotArticle();
 }

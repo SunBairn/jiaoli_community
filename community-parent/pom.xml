@@ -12,6 +12,7 @@
         <module>community-webUI</module>
         <module>community-rabbitmq</module>
         <module>community-upload_file</module>
+        <module>community-search</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>

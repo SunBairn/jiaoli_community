@@ -1,7 +1,6 @@
 package com.zls.mapper;
 
 import com.zls.pojo.ArticleComment;
-import com.zls.pojo.QuestionComment;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 

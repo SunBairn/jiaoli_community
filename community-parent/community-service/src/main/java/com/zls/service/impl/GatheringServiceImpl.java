@@ -22,4 +22,15 @@ public class GatheringServiceImpl implements GatheringService {
         page1.setList(allGathering);
         return page1;
     }
+
+    /**
+     * 根据ID查询活动信息
+     * @param id
+     * @return
+     */
+    @Override
+    public Gathering findGatheringById(Integer id) {
+        Gathering gathering = gatheringMapper.findGatheringById(id);
+        return gathering;
+    }
 }

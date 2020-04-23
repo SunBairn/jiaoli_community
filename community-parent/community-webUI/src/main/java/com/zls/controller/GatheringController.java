@@ -32,4 +32,16 @@ public class GatheringController {
         return new Result(true,StatusCode.OK,"查询成功",pageResult);
     }
 
+
+    /**
+     * 根据ID查询活动信息
+     * @param id
+     * @return
+     */
+    @GetMapping("/select/{id}")
+    public Result findGatheringById(@PathVariable("id") Integer id) {
+        Gathering gathering = gatheringService.findGatheringById(id);
+        return new Result(true, StatusCode.OK, "查询成功！", gathering);
+    }
+
 }

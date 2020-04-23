@@ -1,8 +1,13 @@
 package com.zls.service;
 
+import com.zls.pojo.Article;
 import com.zls.pojo.User;
+import com.zls.vo.PageHome;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 import java.util.Map;
 
 public interface UserService {
@@ -81,4 +86,39 @@ public interface UserService {
      * @return
      */
     boolean updateUserAvatar(Integer id,String avatar);
+
+    /**
+     * 根据用户ID获取用户的信息和用户主页需要显示的信息
+     * @param id userId
+     */
+    PageHome findUserAndOtherById(Integer id);
+
+    /**
+     * 根据用户ID查询收藏的文章
+     * @param userId
+     * @return
+     */
+    List<Article> findCollectionArticleByUserId(Integer userId);
+
+
+    /**
+     * 根据ID查询用户关注列表
+     * @param id 用户ID
+     * @return
+     */
+    List<User> findFollowListById(Integer id);
+
+
+    /**
+     * 根据ID查询用户的粉丝列表
+     * @param id 用户ID
+     * @return
+     */
+    List<User> findFansListById(Integer id);
+
+    /**
+     * 查询粉丝数排名前十的用户信息
+     * @return
+     */
+    List<User> findHotUser();
 }

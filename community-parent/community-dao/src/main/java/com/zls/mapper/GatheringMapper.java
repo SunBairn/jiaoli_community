@@ -23,6 +23,18 @@ import java.util.List;
     List<Gathering> findAllGathering(@Param("start") Long start,@Param("size") int size);
 
 
+    /**
+     * 查询活动数目
+     * @return
+     */
     @Select("select count(1) from tb_gathering")
     Long gatheringCount();
+
+    /**
+     * 根据ID查询活动信息
+     * @param id
+     * @return
+     */
+    @Select("select * from tb_gathering where id=#{id} ")
+    Gathering findGatheringById(@Param("id") Integer id);
 }

@@ -110,8 +110,18 @@ import java.util.Map;
      * @param creator
      * @return
      */
-    @Select("select id,title,creator,gmt_create,view_count,like_count,comment_count from tb_question where creator=#{creator} and type=#{type}")
+    @Select("select id,title,content,creator,gmt_create,view_count,like_count,comment_count from tb_question where creator=#{creator} and type=#{type} order by gmt_modified desc")
     List<Question> findQuestionByCreatorAndType(@Param("creator") Integer creator,@Param("type") Integer type);
+
+
+    /**
+     * 根据用户ID查询所有的问题和帖子
+     * @param creator
+     * @return
+     */
+    @Select("select id,title,creator,gmt_create,view_count,like_count,comment_count from tb_question where creator=#{creator}  order by gmt_modified desc")
+    List<Question> findQuestionByCreator(@Param("creator") Integer creator);
+
 
 
     /**
@@ -164,4 +174,20 @@ import java.util.Map;
      */
     @Delete("delete from tb_question where id=#{Id}")
     boolean deleteQuestion(@Param("Id") Integer id);
+
+    /**
+     * 根据用户ID查询问题数量
+     * @param creator 用户ID
+     * @return
+     */
+    @Select("select count(*) from tb_question where creator=#{creator} and type=2")
+    Integer findQuestionCountByCreator(@Param("creator") Integer creator);
+
+    /**
+     * 根据用户ID查询帖子数量
+     * @param creator 用户ID
+     * @return
+     */
+    @Select("select count(*) from tb_question where creator=#{creator} and type=1")
+    Integer findInvitationCountByCreator(@Param("creator") Integer creator);
 }

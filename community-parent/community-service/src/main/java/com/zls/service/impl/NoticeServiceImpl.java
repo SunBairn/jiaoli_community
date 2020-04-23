@@ -28,4 +28,15 @@ public class NoticeServiceImpl implements NoticeService {
         page1.setList(allNotice);
         return page1;
     }
+
+    /**
+     * 根据ID查询公告信息
+     * @param id
+     * @return
+     */
+    @Override
+    public Notice findNiticeById(Integer id) {
+        Notice notice = noticeMapper.findNoticeById(id);
+        return notice;
+    }
 }
