@@ -6,8 +6,8 @@ spring:
 
 aliyun:
   sms:
-    accessKeyId: LTAI4Fma3bTX7z16FVGrcNU9
-    accessKeySecret: XQbr3O6Yl3JqN5bBVJb8zWDZyoKTs4
+    accessKeyId: 自己的ID
+    accessKeySecret: 自己的秘钥
     template_code: SMS_185810657
     sing_name: 交理论坛
 
